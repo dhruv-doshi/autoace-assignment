@@ -19,8 +19,8 @@ primary_region = "sin"
 
   [http_service.concurrency]
     type = "requests"
-    soft_limit = 20
-    hard_limit = 50
+    soft_limit = 2
+    hard_limit = 8
 
 [[vm]]
   cpu_kind = "shared"
