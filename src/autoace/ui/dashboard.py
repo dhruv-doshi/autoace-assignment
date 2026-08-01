@@ -75,7 +75,7 @@ def _render_analysis(st: Any, api_key: str) -> None:
     if not uploads:
         st.info("Upload one or more calls to begin.")
         return
-    if not st.button("Analyse the files", type="primary", use_container_width=True):
+    if not st.button("Analyse the files", type="primary", width="stretch"):
         return
 
     run_started = time.perf_counter()
@@ -194,7 +194,7 @@ def _render_analysis(st: Any, api_key: str) -> None:
                 }
                 for item in completed_rows
             ]
-            st.dataframe(table_rows, use_container_width=True, hide_index=True)
+            st.dataframe(table_rows, width="stretch", hide_index=True)
         if batch.failed:
             st.warning(f"{batch.failed} file(s) failed. Open technical details below.")
 
@@ -211,7 +211,7 @@ def _render_analysis(st: Any, api_key: str) -> None:
             export_csv(batch),
             "autoace-results.csv",
             "text/csv",
-            use_container_width=True,
+            width="stretch",
         )
 
         run_id = f"p6-{run_timestamp.strftime('%Y%m%dT%H%M%S%fZ')}-{uuid4().hex[:8]}"
@@ -255,9 +255,12 @@ def _render_analysis(st: Any, api_key: str) -> None:
 def _render_docs(st: Any) -> None:
     st.subheader("System documentation")
     if PIPELINE_DIAGRAM.is_file():
-        from streamlit.components.v1 import html
-
-        html(PIPELINE_DIAGRAM.read_text(encoding="utf-8"), height=450, scrolling=False)
+        diagram = PIPELINE_DIAGRAM.read_text(encoding="utf-8")
+        st.iframe(
+            f"<html><body style='margin:0'>{diagram}</body></html>",
+            height=450,
+            width="stretch",
+        )
         st.caption(
             "The production hybrid pipeline combines one remote audio observation "
             "with local checks."
@@ -333,7 +336,7 @@ the dashboard host.
                 "Decision": "Non-schema/truncated responses",
             },
         ],
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 

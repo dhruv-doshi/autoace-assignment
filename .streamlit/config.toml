@@ -10,3 +10,4 @@ gatherUsageStats = false
 [client]
 showErrorDetails = false
 toolbarMode = "minimal"
+disableDataExport = true
