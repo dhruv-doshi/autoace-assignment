@@ -6,12 +6,13 @@ import io
 import os
 import tempfile
 import time
+import zipfile
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, cast
 from uuid import uuid4
 
-from autoace.batch import AudioBatch, export_csv, export_json
+from autoace.batch import AudioBatch, export_csv
 from autoace.environment import capture_environment
 from autoace.evaluation.experiments import write_json_artifact
 from autoace.inference.gemini_audio import OpenRouterAudioObserver
@@ -31,6 +32,7 @@ AUDIO_FILE_TYPES = (
     "wma",
 )
 AUDIO_SUFFIXES = {f".{extension}" for extension in AUDIO_FILE_TYPES}
+PIPELINE_DIAGRAM = Path(__file__).resolve().parents[3] / "assets" / "autoace-pipeline.svg"
 
 
 def _secret(st: Any, name: str) -> str | None:
@@ -53,51 +55,27 @@ def _input_duration(stats: dict[str, object]) -> float:
     return float(cast(float, stats["input_duration_seconds"]))
 
 
-def run() -> None:
-    import streamlit as st
+def _format_duration(seconds: float) -> str:
+    rounded_seconds = max(0, round(seconds))
+    minutes, remaining_seconds = divmod(rounded_seconds, 60)
+    return f"{minutes}m {remaining_seconds:02d}s"
 
-    st.set_page_config(
-        page_title="AutoAce Call Analysis",
-        page_icon="🎧",
-        layout="wide",
-        initial_sidebar_state="collapsed",
-    )
-    st.title("AutoAce Call Analysis")
-    st.caption("Production P6 hybrid · local specialists + Gemini audio")
 
-    with st.sidebar:
-        st.subheader("How it works")
-        st.write(
-            "P6 combines local audio measurements and Whisper semantics with one "
-            "cost-capped remote audio observation."
-        )
-        st.info("Uploaded audio is sent to OpenRouter. Files are processed one at a time.")
-        st.caption("Supported: MP4, OGG, WAV, MP3, FLAC, M4A, AAC, OPUS, WEBM and WMA.")
-
-    expected_password = _secret(st, "AUTOACE_DASHBOARD_PASSWORD")
-    if not expected_password:
-        st.error("Deployment is missing AUTOACE_DASHBOARD_PASSWORD.")
-        st.stop()
-    password = st.text_input("Access password", type="password", placeholder="Enter password")
-    if password != expected_password:
-        st.stop()
-
-    api_key = _secret(st, "OPENROUTER_API_KEY")
-    if not api_key:
-        st.error("Deployment is missing OPENROUTER_API_KEY.")
-        st.stop()
-
+def _render_analysis(st: Any, api_key: str) -> None:
     st.subheader("Analyze calls")
     uploads = st.file_uploader(
         "Choose individual audio files or one ZIP",
         type=["zip", *AUDIO_FILE_TYPES],
         accept_multiple_files=True,
-        help="A ZIP may contain supported audio files at its root. A labels file is optional.",
+        help=(
+            "A ZIP may contain audio files at its root or inside one enclosing folder. "
+            "labels.csv is not required."
+        ),
     )
     if not uploads:
         st.info("Upload one or more calls to begin.")
         return
-    if not st.button("Analyze with P6", type="primary", use_container_width=True):
+    if not st.button("Analyse the files", type="primary", use_container_width=True):
         return
 
     run_started = time.perf_counter()
@@ -111,7 +89,18 @@ def run() -> None:
             return
 
         if zip_uploads:
-            extracted = safe_extract_zip(io.BytesIO(uploads[0].getvalue()), input_root)
+            try:
+                extracted = safe_extract_zip(
+                    io.BytesIO(uploads[0].getvalue()),
+                    input_root,
+                    allow_single_root_directory=True,
+                )
+            except (ValueError, zipfile.BadZipFile) as error:
+                st.error(
+                    "Could not read this ZIP file. Put the audio files at the ZIP root or "
+                    f"inside one enclosing folder: {error}"
+                )
+                return
             audio_files = [
                 file for file in extracted if file.suffix.lower() in AUDIO_SUFFIXES
             ]
@@ -181,10 +170,11 @@ def run() -> None:
         progress.progress(1.0, text="Analysis complete")
 
         completed_rows = [item for item in run_files if item["status"] == "complete"]
-        total_minutes = sum(
-            _input_duration(cast(dict[str, object], item["stats"])) / 60
+        total_seconds = sum(
+            _input_duration(cast(dict[str, object], item["stats"]))
             for item in completed_rows
         )
+        total_minutes = total_seconds / 60
         total_cost = sum(
             _remote_cost(cast(dict[str, object], item["stats"]))
             for item in completed_rows
@@ -192,7 +182,7 @@ def run() -> None:
         metric_columns = st.columns(4)
         metric_columns[0].metric("Completed", batch.completed)
         metric_columns[1].metric("Failed", batch.failed)
-        metric_columns[2].metric("Audio minutes", f"{total_minutes:.2f}")
+        metric_columns[2].metric("Audio duration", _format_duration(total_seconds))
         metric_columns[3].metric("Inference cost", f"${total_cost:.5f}")
 
         if completed_rows:
@@ -216,15 +206,7 @@ def run() -> None:
                     f"${total_cost / total_minutes:.6f} per audio minute."
                 )
 
-        download_columns = st.columns(2)
-        download_columns[0].download_button(
-            "Download JSON",
-            export_json(batch),
-            "autoace-results.json",
-            "application/json",
-            use_container_width=True,
-        )
-        download_columns[1].download_button(
+        st.download_button(
             "Download CSV",
             export_csv(batch),
             "autoace-results.csv",
@@ -268,3 +250,160 @@ def run() -> None:
         )
         st.success("P6 analysis finished.")
         st.caption(f"Run evidence recorded at {artifact_path}.")
+
+
+def _render_docs(st: Any) -> None:
+    st.subheader("System documentation")
+    st.image(
+        str(PIPELINE_DIAGRAM),
+        caption=(
+            "The production hybrid pipeline combines one remote audio observation "
+            "with local checks."
+        ),
+        use_container_width=True,
+    )
+
+    st.markdown(
+        """
+### Current pipeline
+
+1. Each uploaded clip is normalized to 16 kHz mono WAV with FFmpeg.
+2. Gemini 3.5 Flash-Lite receives the normalized audio through OpenRouter.
+3. Local DSP, voice-activity detection, overlap/prosody checks, and Faster-Whisper
+   provide independent evidence.
+4. Deterministic fusion combines that evidence into the required nine-field output schema.
+
+Audio is sent to OpenRouter for the remote observation. The local specialists run on
+the dashboard host.
+"""
+    )
+
+    st.markdown("### Experiment summary and selection")
+    st.write(
+        "P0–P8 were compared. The current pipeline was selected because it retained "
+        "local corrections while staying well below the $0.003 per-audio-minute limit."
+    )
+    st.dataframe(
+        [
+            {
+                "Pipeline": "P0",
+                "Approach": "FFmpeg, DSP, VAD, and rules",
+                "Decision": "Zero-cost baseline",
+            },
+            {
+                "Pipeline": "P1",
+                "Approach": "P0 plus acoustic and overlap challengers",
+                "Decision": "No semantic evidence",
+            },
+            {
+                "Pipeline": "P2",
+                "Approach": "P1 plus prosody and emotion evidence",
+                "Decision": "Tone still weak",
+            },
+            {
+                "Pipeline": "P3",
+                "Approach": "P2 plus Faster-Whisper semantics",
+                "Decision": "Best local regression result",
+            },
+            {
+                "Pipeline": "P4",
+                "Approach": "Gemini audio only",
+                "Decision": "Low cost but variable",
+            },
+            {
+                "Pipeline": "P5",
+                "Approach": "Gemini plus local fusion",
+                "Decision": "Improved technical fields",
+            },
+            {
+                "Pipeline": "P6",
+                "Approach": "P5 plus local overlap, prosody, and ASR specialists",
+                "Decision": "Selected",
+            },
+            {
+                "Pipeline": "P7",
+                "Approach": "P6 plus Gemini text adjudication",
+                "Decision": "Higher cost",
+            },
+            {
+                "Pipeline": "P8",
+                "Approach": "Gemini full-audio upper bound",
+                "Decision": "Non-schema/truncated responses",
+            },
+        ],
+        use_container_width=True,
+        hide_index=True,
+    )
+
+    metric_columns = st.columns(4)
+    metric_columns[0].metric("Live field accuracy", "95.83%")
+    metric_columns[1].metric("Exact files", "2 / 3")
+    metric_columns[2].metric("External cost", "$0.000389 / min")
+    metric_columns[3].metric("Mean wall time", "7.13 s")
+    st.caption(
+        "Final live sweep: 891.5 MB peak RSS. A deterministic replay reached 100% "
+        "field accuracy and 3/3 exact files using recorded responses."
+    )
+    st.warning(
+        "These results use the three supplied labeled calls, including calibration work. "
+        "They are not an estimate of hidden-set accuracy; a new untouched holdout is required."
+    )
+
+    st.markdown("### Tuning and calibration")
+    st.write(
+        "No model weights were fine-tuned. The work focused on prompt and decision-rule "
+        "calibration using the three supplied labeled calls."
+    )
+    st.markdown(
+        """
+- **Remote prompt tuning:** compared the baseline Gemini instruction with rubric v1.
+  The baseline was retained because it achieved 56.25% development field accuracy
+  versus 50.00% for rubric v1; its one-call holdout result was 37.5%.
+- **Local calibration:** refined background-noise signatures, the long-silence threshold,
+  prosody-based intensity, repeated-unanswered-hello semantics, and the
+  spectral-polyphony overlap proxy.
+- **Fusion tuning:** assigned technical-noise corrections to local evidence while retaining
+  the remote audio observation for broader judgement.
+"""
+    )
+
+
+def run() -> None:
+    import streamlit as st
+
+    st.set_page_config(
+        page_title="AutoAce Call Analysis",
+        page_icon="🎧",
+        layout="wide",
+        initial_sidebar_state="collapsed",
+    )
+    st.title("AutoAce Call Analysis")
+    st.caption("Production hybrid · local specialists + Gemini audio")
+
+    with st.sidebar:
+        st.subheader("How it works")
+        st.write(
+            "The current pipeline combines local audio measurements and Whisper semantics "
+            "with one cost-capped remote audio observation."
+        )
+        st.info("Uploaded audio is sent to OpenRouter. Files are processed one at a time.")
+        st.caption("Supported: MP4, OGG, WAV, MP3, FLAC, M4A, AAC, OPUS, WEBM and WMA.")
+
+    expected_password = _secret(st, "AUTOACE_DASHBOARD_PASSWORD")
+    if not expected_password:
+        st.error("Deployment is missing AUTOACE_DASHBOARD_PASSWORD.")
+        st.stop()
+    password = st.text_input("Access password", type="password", placeholder="Enter password")
+    if password != expected_password:
+        st.stop()
+
+    api_key = _secret(st, "OPENROUTER_API_KEY")
+    if not api_key:
+        st.error("Deployment is missing OPENROUTER_API_KEY.")
+        st.stop()
+
+    analysis_tab, docs_tab = st.tabs(["Analyse files", "Documentation"])
+    with analysis_tab:
+        _render_analysis(st, api_key)
+    with docs_tab:
+        _render_docs(st)

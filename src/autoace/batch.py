@@ -124,14 +124,15 @@ def export_json(batch: AudioBatch) -> str:
 
 def export_csv(batch: AudioBatch) -> str:
     output = io.StringIO()
-    writer = csv.DictWriter(output, fieldnames=["name", "result_json", "error"])
+    writer = csv.DictWriter(output, fieldnames=["name", "result_json"])
     writer.writeheader()
     for item in batch.items.values():
+        result = item.result or {}
+        analysis = result.get("analysis") if isinstance(result, dict) else None
         writer.writerow(
             {
                 "name": item.name,
-                "result_json": json.dumps(item.result) if item.result else "",
-                "error": item.error or "",
+                "result_json": json.dumps(analysis) if isinstance(analysis, dict) else "",
             }
         )
     return output.getvalue()

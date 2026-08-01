@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="440" viewBox="0 0 1440 440" role="img" aria-labelledby="title description">
+  <title id="title">AutoAce production audio-analysis pipeline</title>
+  <desc id="description">Audio is normalized, examined by a remote Gemini audio observer and local specialists, then merged through deterministic fusion to form the required prediction.</desc>
+  <rect width="1440" height="440" fill="#f8fafc"/>
+  <text x="720" y="52" text-anchor="middle" fill="#0f172a" font-family="Arial, sans-serif" font-size="29" font-weight="700">AutoAce audio-analysis pipeline</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="48" y="165" width="205" height="115" rx="15" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="151" y="212" text-anchor="middle" fill="#1e3a8a" font-size="20" font-weight="700">Audio upload</text>
+    <text x="151" y="241" text-anchor="middle" fill="#334155" font-size="16">single files or ZIP</text>
+    <rect x="326" y="165" width="205" height="115" rx="15" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="429" y="212" text-anchor="middle" fill="#1e3a8a" font-size="20" font-weight="700">Normalize</text>
+    <text x="429" y="241" text-anchor="middle" fill="#334155" font-size="16">FFmpeg · mono · 16 kHz</text>
+    <rect x="615" y="92" width="250" height="110" rx="15" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="740" y="137" text-anchor="middle" fill="#4c1d95" font-size="20" font-weight="700">Remote observation</text>
+    <text x="740" y="166" text-anchor="middle" fill="#334155" font-size="16">Gemini audio via OpenRouter</text>
+    <rect x="615" y="253" width="250" height="110" rx="15" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="740" y="294" text-anchor="middle" fill="#14532d" font-size="20" font-weight="700">Local specialists</text>
+    <text x="740" y="323" text-anchor="middle" fill="#334155" font-size="16">DSP · VAD · overlap · prosody · ASR</text>
+    <rect x="956" y="165" width="205" height="115" rx="15" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
+    <text x="1059" y="212" text-anchor="middle" fill="#9a3412" font-size="20" font-weight="700">Deterministic fusion</text>
+    <text x="1059" y="241" text-anchor="middle" fill="#334155" font-size="16">local evidence corrections</text>
+    <rect x="1218" y="165" width="174" height="115" rx="15" fill="#cffafe" stroke="#0891b2" stroke-width="2"/>
+    <text x="1305" y="212" text-anchor="middle" fill="#164e63" font-size="20" font-weight="700">Prediction</text>
+    <text x="1305" y="241" text-anchor="middle" fill="#334155" font-size="16">required schema</text>
+    <g stroke="#475569" stroke-width="3" fill="none" marker-end="url(#arrow)">
+      <path d="M253 222 H326"/>
+      <path d="M531 222 H570 V147 H615"/>
+      <path d="M531 222 H570 V308 H615"/>
+      <path d="M865 147 H910 V222 H956"/>
+      <path d="M865 308 H910 V222"/>
+      <path d="M1161 222 H1218"/>
+    </g>
+  </g>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#475569"/></marker></defs>
+</svg>

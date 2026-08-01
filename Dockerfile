@@ -22,6 +22,7 @@ RUN python scripts/download_models.py
 
 COPY app.py ./
 COPY .streamlit ./.streamlit
+COPY assets ./assets
 
 RUN useradd --create-home --uid 10001 autoace \
     && chown -R autoace:autoace /app

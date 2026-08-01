@@ -48,12 +48,42 @@ Optional controls:
 3. Confirm that the Blueprint selects branch `prod` and plan `standard`.
 4. Enter the two required secrets when prompted.
 5. Deploy and wait for `/_stcore/health` to become healthy.
-6. Run one non-confidential smoke file and verify the JSON/CSV download and
+6. Run one non-confidential smoke file and verify the CSV download and
    recorded cost.
 
 The filesystem is ephemeral. Dashboard run artifacts are operational evidence
 only and will disappear after a restart unless an external log/object store is
 added.
+
+## Low-cost deployment: Fly.io
+
+For a low-traffic dashboard or trial evaluation, use the included `fly.toml`.
+It runs one 2 GB shared-CPU machine and automatically suspends it when idle,
+then starts it when the next request arrives. The configuration preserves
+memory headroom while billing only for active time; users will see a brief cold
+start after idling.
+
+The tested peak memory was about 927 MB, so a continuously running 2 GB machine
+is the safer choice. A 1 GB machine may fit a light request but leaves too
+little headroom for the longest observed call and is not recommended for
+production.
+
+Before first deploy:
+
+```bash
+brew install flyctl
+fly auth login
+# Set a globally unique name in fly.toml, then create the matching app:
+fly apps create your-unique-app-name
+fly secrets set OPENROUTER_API_KEY="your-openrouter-key" \
+  AUTOACE_DASHBOARD_PASSWORD="choose-a-strong-password"
+fly deploy
+```
+
+Keep the two secret values out of `fly.toml` and Git. `fly deploy` builds the
+Docker image, installs FFmpeg, and downloads the pinned Faster-Whisper Tiny
+model automatically. Gemini runs through OpenRouter and therefore requires no
+local model download.
 
 ## Other reasonable options
 
