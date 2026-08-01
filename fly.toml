@@ -1,5 +1,5 @@
 # Replace the app name with a globally unique name before first deployment.
-app = "autoace-call-analysis"
+app = "autoace-hire-me"
 primary_region = "sin"
 
 [build]

@@ -32,7 +32,7 @@ AUDIO_FILE_TYPES = (
     "wma",
 )
 AUDIO_SUFFIXES = {f".{extension}" for extension in AUDIO_FILE_TYPES}
-PIPELINE_DIAGRAM = Path(__file__).resolve().parents[3] / "assets" / "autoace-pipeline.svg"
+PIPELINE_DIAGRAM = Path.cwd() / "assets" / "autoace-pipeline.svg"
 
 
 def _secret(st: Any, name: str) -> str | None:
@@ -254,14 +254,16 @@ def _render_analysis(st: Any, api_key: str) -> None:
 
 def _render_docs(st: Any) -> None:
     st.subheader("System documentation")
-    st.image(
-        str(PIPELINE_DIAGRAM),
-        caption=(
+    if PIPELINE_DIAGRAM.is_file():
+        from streamlit.components.v1 import html
+
+        html(PIPELINE_DIAGRAM.read_text(encoding="utf-8"), height=450, scrolling=False)
+        st.caption(
             "The production hybrid pipeline combines one remote audio observation "
             "with local checks."
-        ),
-        use_container_width=True,
-    )
+        )
+    else:
+        st.info("Pipeline diagram is unavailable in this deployment.")
 
     st.markdown(
         """
