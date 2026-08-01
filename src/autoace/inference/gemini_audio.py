@@ -6,6 +6,7 @@ import base64
 import json
 import os
 import subprocess
+import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any
@@ -93,6 +94,18 @@ class OpenRouterAudioObserver:
         try:
             with urllib.request.urlopen(request, timeout=120) as response:
                 response_payload = json.load(response)
+        except urllib.error.HTTPError as error:
+            if error.code == 401:
+                raise RemoteRouteUnavailable(
+                    "OpenRouter authentication failed. Configure a valid OPENROUTER_API_KEY."
+                ) from error
+            if error.code == 402:
+                raise RemoteRouteUnavailable(
+                    "OpenRouter rejected the request because the account has insufficient credit."
+                ) from error
+            raise RemoteRouteUnavailable(
+                f"OpenRouter request failed with HTTP {error.code}."
+            ) from error
         except Exception as error:
             raise RemoteRouteUnavailable(f"OpenRouter request failed: {error}") from error
         content = response_payload["choices"][0]["message"]["content"]
