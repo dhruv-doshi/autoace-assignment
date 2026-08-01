@@ -1,8 +1,6 @@
-"""Quality evidence with an explicit deterministic fallback."""
+"""Deterministic quality evidence used by production P6."""
 
 from __future__ import annotations
-
-from pathlib import Path
 
 
 def quality_proxy(features: dict[str, float]) -> dict[str, object]:
@@ -18,24 +16,5 @@ def quality_proxy(features: dict[str, float]) -> dict[str, object]:
     return {
         "audio_quality": quality,
         "backend": "dsp_proxy",
-        "dnsmos": None,
-        "reason": "DNSMOS artifact not admitted; deterministic evidence only",
+        "reason": "transparent clipping, level, and spectral thresholds",
     }
-
-
-class DnsMosModel:
-    """Optional ONNX DNSMOS adapter; never silently substitutes a score."""
-
-    def __init__(self, model_path: Path) -> None:
-        if not model_path.is_file():
-            raise RuntimeError(f"DNSMOS artifact unavailable: {model_path}")
-        try:
-            import onnxruntime as ort
-        except ImportError as error:
-            raise RuntimeError("onnxruntime is required for DNSMOS") from error
-        self._session = ort.InferenceSession(str(model_path), providers=["CPUExecutionProvider"])
-
-    def predict(self, _samples: object, _sample_rate_hz: int) -> dict[str, object]:
-        raise NotImplementedError(
-            "DNSMOS input adapter must be validated against the pinned artifact"
-        )

@@ -12,18 +12,15 @@ dependencies = [
   "pydantic>=2.8,<3",
   "jsonschema>=4.23,<5",
   "psutil>=5.9,<7",
-  "scipy>=1.12,<2",
   "soundfile>=0.12,<1",
   "streamlit>=1.40,<2",
+  "faster-whisper>=1.1,<2",
   # Streamlit's Starlette server currently relies on Uvicorn internals that
   # changed in 0.52. Keep the compatible range explicit for reproducible runs.
   "uvicorn>=0.30,<0.52"
 ]
 
 [project.optional-dependencies]
-audio = ["onnxruntime>=1.18,<2"]
-remote = ["google-genai>=1,<2"]
-local = ["faster-whisper>=1.1,<2"]
 dev = [
   "hypothesis>=6.100,<7",
   "mypy>=1.10,<2",

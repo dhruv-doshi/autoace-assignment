@@ -1,9 +1,4 @@
-"""Approved Gemini audio boundary with fail-closed defaults.
-
-The implementation deliberately does not make a request unless the caller
-passes explicit approval and a cost projection. Provider SDK integration is
-kept behind this boundary so local candidates remain usable without it.
-"""
+"""Cost-capped OpenRouter audio boundary for production P6."""
 
 from __future__ import annotations
 
@@ -12,15 +7,8 @@ import json
 import os
 import subprocess
 import urllib.request
-from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
-
-from autoace.inference.cost import CostPolicy, CostProjection
-
-
-class RemoteApprovalRequired(RuntimeError):
-    pass
 
 
 class RemoteRouteUnavailable(RuntimeError):
@@ -43,69 +31,28 @@ def _normalize_observation(observation: object) -> dict[str, Any]:
     return normalized
 
 
-@dataclass(frozen=True)
-class RemoteApproval:
-    approved: bool
-    project_id: str | None
-    endpoint: str | None
-    region: str | None
-    deletion_required: bool = True
-
-
-class GeminiAudioObserver:
-    def __init__(self, approval: RemoteApproval, cost_policy: CostPolicy) -> None:
-        self.approval = approval
-        self.cost_policy = cost_policy
-
-    def preflight(self, projection: CostProjection) -> None:
-        if not self.approval.approved:
-            raise RemoteApprovalRequired("remote audio approval is not configured")
-        if not self.approval.project_id or not self.approval.endpoint:
-            raise RemoteApprovalRequired("remote project and endpoint are required")
-        self.cost_policy.require_hard_compliance(projection)
-
-    def observe(
-        self,
-        audio_path: Path,
-        *,
-        projection: CostProjection,
-        prompt_version: str,
-    ) -> dict[str, Any]:
-        self.preflight(projection)
-        if not audio_path.is_file():
-            raise ValueError(f"audio file does not exist: {audio_path}")
-        raise RemoteRouteUnavailable(
-            "provider adapter is disabled until endpoint credentials and privacy "
-            "approval are supplied"
-        )
-
-
 class OpenRouterAudioObserver:
-    """OpenAI-compatible OpenRouter audio observer with an explicit spend cap."""
+    """P6's OpenAI-compatible Gemini audio observer with an explicit spend cap."""
 
     def __init__(
         self,
         *,
-        model: str = "google/gemini-3.5-flash-lite",
         budget_usd: float = 0.10,
         max_output_tokens: int = 256,
         instructions: str = "",
+        api_key: str | None = None,
     ) -> None:
-        self.model = model
+        self.model = "google/gemini-3.5-flash-lite"
         self.budget_usd = budget_usd
         self.max_output_tokens = max_output_tokens
         self.instructions = instructions.strip()
         self.spent_usd = 0.0
         self.base_url = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1")
-        self.api_key = os.environ.get("OPENROUTER_API_KEY")
-        self.prompt_version = "p4-openrouter-v2"
+        self.api_key = api_key or os.environ.get("OPENROUTER_API_KEY")
+        self.prompt_version = "p6-openrouter-audio-v1"
 
     def _prices(self) -> tuple[float, float]:
-        prices = {
-            "google/gemini-3.5-flash-lite": (0.30, 2.50),
-            "google/gemini-3.6-flash": (1.50, 7.50),
-        }
-        return prices.get(self.model, prices["google/gemini-3.5-flash-lite"])
+        return 0.30, 2.50
 
     def _wav_bytes(self, audio_path: Path) -> bytes:
         result = subprocess.run(
@@ -216,36 +163,4 @@ class OpenRouterAudioObserver:
             "max_tokens": self.max_output_tokens,
             "response_format": {"type": "json_object"},
         }
-        return self._request_observation(payload, estimated_cost=estimated)
-
-    def adjudicate_text(self, evidence: dict[str, Any]) -> dict[str, Any]:
-        """Adjudicate compact candidate evidence without uploading audio again."""
-
-        if not self.api_key:
-            raise RemoteRouteUnavailable("OPENROUTER_API_KEY is not configured")
-        evidence_json = json.dumps(evidence, separators=(",", ":"))
-        input_price, output_price = self._prices()
-        estimated = (
-            (len(evidence_json) // 4 + 1024) * input_price / 1_000_000
-            + self.max_output_tokens * output_price / 1_000_000
-        )
-        if self.spent_usd + estimated > self.budget_usd:
-            raise RuntimeError("OpenRouter research budget exceeded before request")
-        prompt = (
-            "Adjudicate the following call-analysis evidence. Return only a JSON object "
-            "with the public call-analysis fields and a confidence from 0 to 1. Preserve "
-            "a no-noise invariant: false requires empty type and severity none. Evidence: "
-            f"{evidence_json}"
-        )
-        payload = {
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": "You are a careful call-analysis adjudicator."},
-                {"role": "user", "content": prompt},
-            ],
-            "temperature": 0,
-            "max_tokens": self.max_output_tokens,
-            "response_format": {"type": "json_object"},
-        }
-        self.prompt_version = "p7-openrouter-text-v1"
         return self._request_observation(payload, estimated_cost=estimated)

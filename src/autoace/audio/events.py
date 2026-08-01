@@ -1,8 +1,6 @@
-"""Acoustic-event candidates and a transparent no-model proxy."""
+"""Transparent acoustic-event evidence used by production P6."""
 
 from __future__ import annotations
-
-from pathlib import Path
 
 
 def acoustic_event_proxy(features: dict[str, float]) -> dict[str, object]:
@@ -51,22 +49,3 @@ def acoustic_event_proxy(features: dict[str, float]) -> dict[str, object]:
         "yamnet": None,
         "reason": reason,
     }
-
-
-class YamnetTfliteModel:
-    """Optional TFLite YAMNet adapter with fail-closed loading."""
-
-    def __init__(self, model_path: Path) -> None:
-        if not model_path.is_file():
-            raise RuntimeError(f"YAMNet artifact unavailable: {model_path}")
-        try:
-            from tflite_runtime.interpreter import Interpreter
-        except ImportError as error:
-            raise RuntimeError("tflite_runtime is required for YAMNet") from error
-        self._interpreter = Interpreter(model_path=str(model_path))
-        self._interpreter.allocate_tensors()
-
-    def predict(self, _samples: object, _sample_rate_hz: int) -> dict[str, object]:
-        raise NotImplementedError(
-            "YAMNet frame adapter must be validated against the pinned artifact"
-        )

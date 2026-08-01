@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-
 import numpy as np
 
 
@@ -62,14 +60,3 @@ def spectral_overlap_proxy(
         "median_voice_peak_count": median_peak_count,
         "note": "Heuristic only; validate against a labeled overlap set before production use.",
     }
-
-
-class OverlapModel:
-    """Placeholder boundary for an admitted pyannote/ONNX overlap model."""
-
-    def __init__(self, model_path: Path) -> None:
-        if not model_path.is_file():
-            raise RuntimeError(f"overlap artifact unavailable: {model_path}")
-
-    def predict(self, _samples: object, _sample_rate_hz: int) -> dict[str, object]:
-        raise NotImplementedError("overlap model adapter requires a validated artifact")

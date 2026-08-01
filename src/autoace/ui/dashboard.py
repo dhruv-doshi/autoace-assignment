@@ -1,4 +1,4 @@
-"""Minimal Streamlit UI for the local P0 baseline."""
+"""Simple production Streamlit dashboard for the P6 hybrid pipeline."""
 
 from __future__ import annotations
 
@@ -8,32 +8,17 @@ import tempfile
 import time
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import cast
+from typing import Any, cast
 from uuid import uuid4
 
-from autoace.batch import (
-    AudioBatch,
-    export_csv,
-    export_json,
-    parse_manifest,
-    validate_manifest_files,
-)
+from autoace.batch import AudioBatch, export_csv, export_json
 from autoace.environment import capture_environment
 from autoace.evaluation.experiments import write_json_artifact
 from autoace.inference.gemini_audio import OpenRouterAudioObserver
-from autoace.pipeline import (
-    analyze_p0_with_stats,
-    analyze_p1_with_stats,
-    analyze_p2_with_stats,
-    analyze_p3_with_stats,
-    analyze_p4_with_stats,
-    analyze_p5_with_stats,
-    analyze_p6_with_stats,
-    analyze_p7_with_stats,
-)
+from autoace.pipeline import analyze_p6_with_stats
 from autoace.security import safe_extract_zip
 
-AUDIO_FILE_TYPES = [
+AUDIO_FILE_TYPES = (
     "mp4",
     "ogg",
     "wav",
@@ -44,51 +29,77 @@ AUDIO_FILE_TYPES = [
     "opus",
     "webm",
     "wma",
-]
+)
+AUDIO_SUFFIXES = {f".{extension}" for extension in AUDIO_FILE_TYPES}
+
+
+def _secret(st: Any, name: str) -> str | None:
+    value = os.environ.get(name)
+    if value:
+        return value
+    try:
+        secret = st.secrets.get(name)
+    except Exception:
+        return None
+    return str(secret) if secret else None
+
+
+def _remote_cost(stats: dict[str, object]) -> float:
+    remote = stats.get("remote")
+    return float(remote.get("actual_cost_usd", 0.0)) if isinstance(remote, dict) else 0.0
+
+
+def _input_duration(stats: dict[str, object]) -> float:
+    return float(cast(float, stats["input_duration_seconds"]))
 
 
 def run() -> None:
     import streamlit as st
 
-    st.set_page_config(page_title="AutoAce Call Analysis", layout="wide")
+    st.set_page_config(
+        page_title="AutoAce Call Analysis",
+        page_icon="🎧",
+        layout="wide",
+        initial_sidebar_state="collapsed",
+    )
     st.title("AutoAce Call Analysis")
-    st.caption("P0 local CPU baseline — experiment winner not selected yet")
-    expected_password = os.environ.get("AUTOACE_DASHBOARD_PASSWORD")
+    st.caption("Production P6 hybrid · local specialists + Gemini audio")
+
+    with st.sidebar:
+        st.subheader("How it works")
+        st.write(
+            "P6 combines local audio measurements and Whisper semantics with one "
+            "cost-capped remote audio observation."
+        )
+        st.info("Uploaded audio is sent to OpenRouter. Files are processed one at a time.")
+        st.caption("Supported: MP4, OGG, WAV, MP3, FLAC, M4A, AAC, OPUS, WEBM and WMA.")
+
+    expected_password = _secret(st, "AUTOACE_DASHBOARD_PASSWORD")
     if not expected_password:
-        st.error("AUTOACE_DASHBOARD_PASSWORD is not configured.")
-        return
-    password = st.text_input("Password", type="password")
+        st.error("Deployment is missing AUTOACE_DASHBOARD_PASSWORD.")
+        st.stop()
+    password = st.text_input("Access password", type="password", placeholder="Enter password")
     if password != expected_password:
         st.stop()
+
+    api_key = _secret(st, "OPENROUTER_API_KEY")
+    if not api_key:
+        st.error("Deployment is missing OPENROUTER_API_KEY.")
+        st.stop()
+
+    st.subheader("Analyze calls")
     uploads = st.file_uploader(
-        "Upload an evaluation ZIP or individual audio files",
+        "Choose individual audio files or one ZIP",
         type=["zip", *AUDIO_FILE_TYPES],
         accept_multiple_files=True,
-        help=(
-            "ZIP uploads must include a root-level labels.csv. Individual files "
-            "can be analyzed without a manifest."
-        ),
+        help="A ZIP may contain supported audio files at its root. A labels file is optional.",
     )
     if not uploads:
+        st.info("Upload one or more calls to begin.")
         return
-    pipeline = st.selectbox(
-        "Pipeline",
-        options=(
-            "P0 — deterministic local",
-            "P1 — local acoustic evidence",
-            "P2 — local prosody evidence",
-            "P3 — local Whisper semantics",
-            "P4 — Gemini audio",
-            "P5 — Gemini audio + P0 fusion",
-            "P6 — Gemini + local specialists",
-            "P7 — Gemini text adjudication",
-        ),
-        help="P4–P7 use OpenRouter and require OPENROUTER_API_KEY.",
-    )
-    if pipeline[:2] in {"P4", "P5", "P6", "P7"}:
-        st.warning("This pipeline sends uploaded audio to OpenRouter for analysis.")
-    if not st.button(f"Run {pipeline}"):
+    if not st.button("Analyze with P6", type="primary", use_container_width=True):
         return
+
     run_started = time.perf_counter()
     run_timestamp = datetime.now(UTC)
     with tempfile.TemporaryDirectory(prefix="autoace-") as temporary:
@@ -96,85 +107,68 @@ def run() -> None:
         input_root = root / "input"
         zip_uploads = [upload for upload in uploads if upload.name.lower().endswith(".zip")]
         if zip_uploads and len(uploads) != 1:
-            st.error("Upload either one evaluation ZIP or individual audio files, not both.")
+            st.error("Upload either one ZIP or individual files, not both.")
             return
 
         if zip_uploads:
-            files = safe_extract_zip(io.BytesIO(uploads[0].getvalue()), input_root)
-            manifest_path = next(
-                (file for file in files if file.name.lower() == "labels.csv"), None
-            )
-            if manifest_path is None:
-                st.error("ZIP must contain a root-level labels.csv manifest.")
-                return
-            with manifest_path.open(newline="") as manifest_file:
-                manifest_rows = parse_manifest(manifest_file)
-            audio_files = [file for file in files if file.name != manifest_path.name]
-            report = validate_manifest_files(manifest_rows, [file.name for file in audio_files])
-            if report.missing or report.unmatched:
-                st.error(
-                    f"Manifest mismatch. Missing={report.missing}; unmatched={report.unmatched}"
-                )
-                return
+            extracted = safe_extract_zip(io.BytesIO(uploads[0].getvalue()), input_root)
+            audio_files = [
+                file for file in extracted if file.suffix.lower() in AUDIO_SUFFIXES
+            ]
+            ignored = len(extracted) - len(audio_files)
+            if ignored:
+                st.caption(f"Ignored {ignored} non-audio file(s) in the ZIP.")
         else:
             input_root.mkdir(parents=True, exist_ok=True)
             audio_files = []
+            seen: set[str] = set()
             for upload in uploads:
                 filename = Path(upload.name).name
-                if not filename or filename != upload.name:
-                    st.error(f"Invalid upload filename: {upload.name}")
+                if (
+                    not filename
+                    or filename != upload.name
+                    or filename in seen
+                    or Path(filename).suffix.lower() not in AUDIO_SUFFIXES
+                ):
+                    st.error(f"Invalid or duplicate audio filename: {upload.name}")
                     return
+                seen.add(filename)
                 target = input_root / filename
                 target.write_bytes(upload.getvalue())
                 audio_files.append(target)
+        if not audio_files:
+            st.error("No supported audio files were found.")
+            return
 
+        max_files = int(os.environ.get("AUTOACE_MAX_FILES_PER_RUN", "25"))
+        if len(audio_files) > max_files:
+            st.error(f"This deployment accepts at most {max_files} files per run.")
+            return
+
+        budget_usd = float(os.environ.get("AUTOACE_OPENROUTER_BUDGET_USD", "0.10"))
+        observer = OpenRouterAudioObserver(budget_usd=budget_usd, api_key=api_key)
         batch = AudioBatch(root)
-        run_files: list[dict[str, object]] = []
-        remote_observer = (
-            OpenRouterAudioObserver(budget_usd=0.05 if pipeline.startswith("P7") else 0.10)
-            if pipeline[:2] in {"P4", "P5", "P6", "P7"}
-            else None
-        )
-        text_observer = (
-            OpenRouterAudioObserver(
-                model="google/gemini-3.6-flash", budget_usd=0.05, max_output_tokens=1024
-            )
-            if pipeline.startswith("P7")
-            else None
-        )
         for file in audio_files:
             batch.add(file.name)
-        progress = st.progress(0.0)
+
+        run_files: list[dict[str, object]] = []
+        progress = st.progress(0.0, text="Preparing analysis…")
         for index, file in enumerate(audio_files, start=1):
             batch.mark_processing(file.name)
             file_started = time.perf_counter()
+            progress.progress(
+                (index - 1) / len(audio_files),
+                text=f"Analyzing {file.name} ({index}/{len(audio_files)})",
+            )
             try:
-                if pipeline.startswith("P4"):
-                    assert remote_observer is not None
-                    analysis, stats = analyze_p4_with_stats(file, remote_observer)
-                elif pipeline.startswith("P5"):
-                    assert remote_observer is not None
-                    analysis, stats = analyze_p5_with_stats(file, remote_observer)
-                elif pipeline.startswith("P6"):
-                    assert remote_observer is not None
-                    analysis, stats = analyze_p6_with_stats(file, remote_observer)
-                elif pipeline.startswith("P7"):
-                    assert remote_observer is not None and text_observer is not None
-                    analysis, stats = analyze_p7_with_stats(
-                        file, remote_observer, text_observer
-                    )
-                elif pipeline.startswith("P3"):
-                    analysis, stats = analyze_p3_with_stats(file)
-                elif pipeline.startswith("P2"):
-                    analysis, stats = analyze_p2_with_stats(file)
-                elif pipeline.startswith("P1"):
-                    analysis, stats = analyze_p1_with_stats(file)
-                else:
-                    analysis, stats = analyze_p0_with_stats(file)
-                payload: dict[str, object] = {"analysis": analysis.model_dump(), "stats": stats}
+                analysis, stats = analyze_p6_with_stats(file, observer)
+                payload: dict[str, object] = {
+                    "analysis": analysis.model_dump(),
+                    "stats": stats,
+                }
                 batch.mark_complete(file.name, payload)
                 run_files.append({"name": file.name, "status": "complete", **payload})
-            except Exception as error:  # isolate one malformed file
+            except Exception as error:
                 batch.mark_failed(file.name, str(error))
                 run_files.append(
                     {
@@ -184,38 +178,84 @@ def run() -> None:
                         "elapsed_seconds": time.perf_counter() - file_started,
                     }
                 )
-            progress.progress(index / len(audio_files))
-        st.json(batch.items)
-        st.download_button("Download JSON", export_json(batch), "results.json", "application/json")
-        st.download_button("Download CSV", export_csv(batch), "results.csv", "text/csv")
+        progress.progress(1.0, text="Analysis complete")
 
-        run_id = (
-            f"{pipeline[:2].lower()}-{run_timestamp.strftime('%Y%m%dT%H%M%S%fZ')}-"
-            f"{uuid4().hex[:8]}"
+        completed_rows = [item for item in run_files if item["status"] == "complete"]
+        total_minutes = sum(
+            _input_duration(cast(dict[str, object], item["stats"])) / 60
+            for item in completed_rows
         )
+        total_cost = sum(
+            _remote_cost(cast(dict[str, object], item["stats"]))
+            for item in completed_rows
+        )
+        metric_columns = st.columns(4)
+        metric_columns[0].metric("Completed", batch.completed)
+        metric_columns[1].metric("Failed", batch.failed)
+        metric_columns[2].metric("Audio minutes", f"{total_minutes:.2f}")
+        metric_columns[3].metric("Inference cost", f"${total_cost:.5f}")
+
+        if completed_rows:
+            st.subheader("Results")
+            table_rows = [
+                {
+                    "file": item["name"],
+                    **cast(dict[str, object], item["analysis"]),
+                }
+                for item in completed_rows
+            ]
+            st.dataframe(table_rows, use_container_width=True, hide_index=True)
+        if batch.failed:
+            st.warning(f"{batch.failed} file(s) failed. Open technical details below.")
+
+        with st.expander("Technical details"):
+            st.json(batch.items)
+            if total_minutes:
+                st.caption(
+                    f"Observed external inference cost: "
+                    f"${total_cost / total_minutes:.6f} per audio minute."
+                )
+
+        download_columns = st.columns(2)
+        download_columns[0].download_button(
+            "Download JSON",
+            export_json(batch),
+            "autoace-results.json",
+            "application/json",
+            use_container_width=True,
+        )
+        download_columns[1].download_button(
+            "Download CSV",
+            export_csv(batch),
+            "autoace-results.csv",
+            "text/csv",
+            use_container_width=True,
+        )
+
+        run_id = f"p6-{run_timestamp.strftime('%Y%m%dT%H%M%S%fZ')}-{uuid4().hex[:8]}"
         run_stats = {
             "run_id": run_id,
-            "pipeline": pipeline[:2],
-            "experiment": (
-                "E01" if pipeline.startswith("P1")
-                else "E05" if pipeline.startswith("P2")
-                else "E07" if pipeline.startswith("P3")
-                else "E09" if pipeline.startswith("P4")
-                else "E10" if pipeline.startswith("P5")
-                else "E11" if pipeline.startswith("P6")
-                else "E12" if pipeline.startswith("P7")
-                else "E00"
-            ),
+            "pipeline": "P6",
+            "experiment": "E11",
             "started_at_utc": run_timestamp.isoformat(),
             "elapsed_seconds": time.perf_counter() - run_started,
             "file_count": len(audio_files),
             "completed_count": batch.completed,
             "failed_count": batch.failed,
+            "total_audio_minutes": total_minutes,
+            "total_external_cost_usd": total_cost,
+            "cost_per_audio_minute_usd": (
+                total_cost / total_minutes if total_minutes else 0.0
+            ),
             "peak_rss_mb": max(
                 (
-                    float(cast(float, cast(dict[str, object], item["stats"])["peak_rss_mb"]))
-                    for item in run_files
-                    if "stats" in item
+                    float(
+                        cast(
+                            float,
+                            cast(dict[str, object], item["stats"])["peak_rss_mb"],
+                        )
+                    )
+                    for item in completed_rows
                 ),
                 default=0.0,
             ),
@@ -224,6 +264,7 @@ def run() -> None:
         }
         artifact_path = write_json_artifact(
             run_stats,
-            Path("artifacts/dashboard_runs") / f"{run_stats['run_id']}.json",
+            Path("artifacts/dashboard_runs") / f"{run_id}.json",
         )
-        st.caption(f"Recorded run stats: {artifact_path}")
+        st.success("P6 analysis finished.")
+        st.caption(f"Run evidence recorded at {artifact_path}.")

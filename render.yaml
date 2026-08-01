@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: autoace-call-analysis
+    runtime: docker
+    branch: prod
+    plan: standard
+    healthCheckPath: /_stcore/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: AUTOACE_DASHBOARD_PASSWORD
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: AUTOACE_OPENROUTER_BUDGET_USD
+        value: "0.10"
+      - key: AUTOACE_MAX_FILES_PER_RUN
+        value: "25"
