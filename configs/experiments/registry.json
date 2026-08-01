@@ -1,0 +1,20 @@
+{
+  "version": "2026-08-01",
+  "candidates": ["P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8"],
+  "experiments": [
+    {"id": "E00", "candidate": "P0", "purpose": "deterministic lower bound"},
+    {"id": "E01", "candidate": "P1", "purpose": "DNSMOS ablation"},
+    {"id": "E02", "candidate": "P1", "purpose": "YAMNet ablation"},
+    {"id": "E03", "candidate": "P1", "purpose": "overlap ablation"},
+    {"id": "E04", "candidate": "P1", "purpose": "accepted local specialist combination"},
+    {"id": "E05", "candidate": "P2", "purpose": "SpeechBrain emotion challenger"},
+    {"id": "E06", "candidate": "P2", "purpose": "emotion2vec challenger"},
+    {"id": "E07", "candidate": "P3", "purpose": "Whisper tiny challenger"},
+    {"id": "E08", "candidate": "P3", "purpose": "Whisper base challenger"},
+    {"id": "E09", "candidate": "P4", "purpose": "Gemini 3.5 audio"},
+    {"id": "E10", "candidate": "P5", "purpose": "Gemini plus deterministic fusion"},
+    {"id": "E11", "candidate": "P6", "purpose": "Gemini plus accepted specialists"},
+    {"id": "E12", "candidate": "P7", "purpose": "batched Gemini 3.6 text"},
+    {"id": "E13", "candidate": "P8", "purpose": "bounded Gemini 3.6 audio upper bound"}
+  ]
+}

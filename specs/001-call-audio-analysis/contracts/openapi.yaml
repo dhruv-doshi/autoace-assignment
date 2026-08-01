@@ -1,0 +1,122 @@
+openapi: 3.1.0
+info:
+  title: AutoAce Call Analysis Internal Contract
+  version: 1.0.0
+  description: >
+    Logical service boundary used by the Streamlit UI and tests. The initial
+    implementation may call these functions in-process rather than expose HTTP.
+paths:
+  /batches:
+    post:
+      summary: Validate and create an evaluation batch
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [archive]
+              properties:
+                archive:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Validated batch
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchStatus"
+        "400":
+          description: Unsafe or invalid batch
+  /batches/{batch_id}/run:
+    post:
+      summary: Process all eligible batch items
+      parameters:
+        - $ref: "#/components/parameters/BatchId"
+      responses:
+        "202":
+          description: Processing started
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchStatus"
+        "409":
+          description: Batch is ineligible or already running
+  /batches/{batch_id}:
+    get:
+      summary: Read progress and per-file status
+      parameters:
+        - $ref: "#/components/parameters/BatchId"
+      responses:
+        "200":
+          description: Current status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchStatus"
+  /batches/{batch_id}/results:
+    get:
+      summary: Download filename-preserving results
+      parameters:
+        - $ref: "#/components/parameters/BatchId"
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [json, csv]
+            default: json
+      responses:
+        "200":
+          description: Results in selected format
+        "409":
+          description: No completed results
+components:
+  parameters:
+    BatchId:
+      name: batch_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    BatchStatus:
+      type: object
+      additionalProperties: false
+      required:
+        - batch_id
+        - status
+        - total
+        - queued
+        - processing
+        - completed
+        - failed
+      properties:
+        batch_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [validating, ready, processing, complete, partial, failed]
+        total:
+          type: integer
+          minimum: 0
+        queued:
+          type: integer
+          minimum: 0
+        processing:
+          type: integer
+          minimum: 0
+        completed:
+          type: integer
+          minimum: 0
+        failed:
+          type: integer
+          minimum: 0
+        projected_cost_usd:
+          type: number
+          minimum: 0
+        actual_cost_usd:
+          type: number
+          minimum: 0

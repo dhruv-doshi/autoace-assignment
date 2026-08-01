@@ -1,0 +1,2118 @@
+{
+  "candidates": [
+    {
+      "average_field_accuracy": 0.5416666666666666,
+      "candidate_id": "P4",
+      "completed_count": 3,
+      "cost_per_audio_minute_usd": 0.0006743662503657273,
+      "exact_match_rate": 0.0,
+      "field_accuracy": {
+        "audio_quality": 1.0,
+        "background_noise_present": 0.6666666666666666,
+        "background_noise_severity": 0.3333333333333333,
+        "background_noise_type": 0.6666666666666666,
+        "emotional_intensity": 0.0,
+        "emotional_tone": 0.3333333333333333,
+        "long_silence_present": 0.6666666666666666,
+        "speaker_overlap_present": 0.6666666666666666
+      },
+      "file_count": 3,
+      "files": [
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": false,
+            "background_noise_severity": "none",
+            "background_noise_type": "",
+            "confidence": 0.95,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": true,
+            "speaker_overlap_present": false
+          },
+          "cost_usd": 0.0005445,
+          "file": "call_001.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 495035,
+            "dsp": {
+              "bandwidth_hz": 1053.714660556191,
+              "clipping_ratio": 2.0200591877342008e-06,
+              "crest_factor": 8.535137155007531,
+              "dbfs": -18.624475164014772,
+              "dc_offset": 3.1272450087271864e-06,
+              "duration_seconds": 30.9396875,
+              "peak_abs": 0.999969482421875,
+              "rms": 0.1171591579914093,
+              "spectral_centroid_hz": 1188.293748760761,
+              "spectral_flatness": 0.18365409800169483,
+              "zcr": 0.12473082656948815
+            },
+            "elapsed_seconds": 6.139293665997684,
+            "events_backend": "dsp_proxy",
+            "input_bytes": 503444,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 30.946188,
+            "input_sample_rate_hz": 48000,
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 69.5,
+            "pipeline": "P4",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005445,
+              "estimated_cost_usd": 0.0015514,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.95,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": true,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0005445,
+              "usage": {
+                "completion_tokens": 99,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005445,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.0002475,
+                  "upstream_inference_cost": 0.0005445,
+                  "upstream_inference_prompt_cost": 0.000297
+                },
+                "is_byok": false,
+                "prompt_tokens": 990,
+                "prompt_tokens_details": {
+                  "audio_tokens": 774,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1089
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 2.8999999999999986,
+              "speech_ratio": 0.3703980526629433
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        },
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": false,
+            "background_noise_severity": "none",
+            "background_noise_type": "",
+            "confidence": 0.8,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": false
+          },
+          "cost_usd": 0.0005723,
+          "file": "call_002.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 559370,
+            "dsp": {
+              "bandwidth_hz": 1104.8399328467735,
+              "clipping_ratio": 0.0,
+              "crest_factor": 13.80761162447983,
+              "dbfs": -27.09946027868245,
+              "dc_offset": -9.657688906372641e-07,
+              "duration_seconds": 34.960625,
+              "peak_abs": 0.6097412109375,
+              "rms": 0.04415978863835335,
+              "spectral_centroid_hz": 1115.0220519243298,
+              "spectral_flatness": 0.17974054785309124,
+              "zcr": 0.13166621675495066
+            },
+            "elapsed_seconds": 4.094556458003353,
+            "events_backend": "dsp_proxy",
+            "input_bytes": 568799,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 34.967125,
+            "input_sample_rate_hz": 48000,
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 74.75,
+            "pipeline": "P4",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005723,
+              "estimated_cost_usd": 0.0015901,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.8,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0011167999999999998,
+              "usage": {
+                "completion_tokens": 98,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005723,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.000245,
+                  "upstream_inference_cost": 0.0005723,
+                  "upstream_inference_prompt_cost": 0.0003273
+                },
+                "is_byok": false,
+                "prompt_tokens": 1091,
+                "prompt_tokens_details": {
+                  "audio_tokens": 875,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1189
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 3.29,
+              "speech_ratio": 0.366126177664158
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        },
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": true,
+            "background_noise_severity": "low",
+            "background_noise_type": "sharp static",
+            "confidence": 0.9,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": true
+          },
+          "cost_usd": 0.0015564,
+          "file": "call_003.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 2750740,
+            "dsp": {
+              "bandwidth_hz": 1443.1402658395498,
+              "clipping_ratio": 1.0906156161614693e-05,
+              "crest_factor": 8.764653256820573,
+              "dbfs": -18.854694788223924,
+              "dc_offset": -2.3212969608721323e-06,
+              "duration_seconds": 171.92125,
+              "peak_abs": 1.0,
+              "rms": 0.11409464478492737,
+              "spectral_centroid_hz": 1512.5767039290831,
+              "spectral_flatness": 0.3373891185587147,
+              "zcr": 0.12895443733483983
+            },
+            "elapsed_seconds": 5.7114305419963785,
+            "events_backend": "dsp_proxy",
+            "input_bytes": 2791833,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 171.927771,
+            "input_sample_rate_hz": 48000,
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 557.140625,
+            "pipeline": "P4",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0015564,
+              "estimated_cost_usd": 0.002905,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": true,
+                "background_noise_severity": "low",
+                "background_noise_type": "sharp static",
+                "confidence": 0.9,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": true
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0026731999999999997,
+              "usage": {
+                "completion_tokens": 81,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0015564,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.0002025,
+                  "upstream_inference_cost": 0.0015564,
+                  "upstream_inference_prompt_cost": 0.0013539
+                },
+                "is_byok": false,
+                "prompt_tokens": 4513,
+                "prompt_tokens_details": {
+                  "audio_tokens": 4299,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 4594
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 7.329999999999998,
+              "speech_ratio": 0.6209238241345967
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        }
+      ],
+      "mean_elapsed_seconds": 5.315093555332472,
+      "peak_rss_mb": 557.140625,
+      "status": "complete",
+      "total_audio_minutes": 3.9640180666666667,
+      "total_cost_usd": 0.0026731999999999997
+    },
+    {
+      "average_field_accuracy": 0.7083333333333334,
+      "candidate_id": "P5",
+      "completed_count": 3,
+      "cost_per_audio_minute_usd": 0.0004000990846476297,
+      "exact_match_rate": 0.0,
+      "field_accuracy": {
+        "audio_quality": 1.0,
+        "background_noise_present": 1.0,
+        "background_noise_severity": 1.0,
+        "background_noise_type": 1.0,
+        "emotional_intensity": 0.0,
+        "emotional_tone": 0.3333333333333333,
+        "long_silence_present": 1.0,
+        "speaker_overlap_present": 0.3333333333333333
+      },
+      "file_count": 3,
+      "files": [
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": false,
+            "background_noise_severity": "none",
+            "background_noise_type": "",
+            "confidence": 0.9,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": true
+          },
+          "cost_usd": 0.0005414,
+          "file": "call_001.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 495035,
+            "dsp": {
+              "bandwidth_hz": 1053.714660556191,
+              "clipping_ratio": 2.0200591877342008e-06,
+              "crest_factor": 8.535137155007531,
+              "dbfs": -18.624475164014772,
+              "dc_offset": 3.1272450087271864e-06,
+              "duration_seconds": 30.9396875,
+              "peak_abs": 0.999969482421875,
+              "rms": 0.1171591579914093,
+              "spectral_centroid_hz": 1188.293748760761,
+              "spectral_flatness": 0.18365409800169483,
+              "zcr": 0.12473082656948815
+            },
+            "elapsed_seconds": 3.755205041001318,
+            "events_backend": "dsp_proxy",
+            "fusion": {
+              "audio_quality_owner": "P0",
+              "long_silence_owner": "P0",
+              "noise_owner": "P0_when_signature_present_else_P4",
+              "semantic_owner": "P4"
+            },
+            "input_bytes": 503444,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 30.946188,
+            "input_sample_rate_hz": 48000,
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 563.328125,
+            "pipeline": "P5",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005414,
+              "estimated_cost_usd": 0.0015514,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.9,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": true,
+                "speaker_overlap_present": true
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0005414,
+              "usage": {
+                "completion_tokens": 98,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005414,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.000245,
+                  "upstream_inference_cost": 0.0005414,
+                  "upstream_inference_prompt_cost": 0.0002964
+                },
+                "is_byok": false,
+                "prompt_tokens": 988,
+                "prompt_tokens_details": {
+                  "audio_tokens": 774,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1086
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 2.8999999999999986,
+              "speech_ratio": 0.3703980526629433
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        },
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": true,
+            "background_noise_severity": "medium",
+            "background_noise_type": "TV",
+            "confidence": 0.9,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": false
+          },
+          "cost_usd": 0.0005217,
+          "file": "call_002.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 559370,
+            "dsp": {
+              "bandwidth_hz": 1104.8399328467735,
+              "clipping_ratio": 0.0,
+              "crest_factor": 13.80761162447983,
+              "dbfs": -27.09946027868245,
+              "dc_offset": -9.657688906372641e-07,
+              "duration_seconds": 34.960625,
+              "peak_abs": 0.6097412109375,
+              "rms": 0.04415978863835335,
+              "spectral_centroid_hz": 1115.0220519243298,
+              "spectral_flatness": 0.17974054785309124,
+              "zcr": 0.13166621675495066
+            },
+            "elapsed_seconds": 4.185343875004037,
+            "events_backend": "dsp_proxy",
+            "fusion": {
+              "audio_quality_owner": "P0",
+              "long_silence_owner": "P0",
+              "noise_owner": "P0_when_signature_present_else_P4",
+              "semantic_owner": "P4"
+            },
+            "input_bytes": 568799,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 34.967125,
+            "input_sample_rate_hz": 48000,
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 590.3125,
+            "pipeline": "P5",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005217,
+              "estimated_cost_usd": 0.0015901,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.9,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0010631,
+              "usage": {
+                "completion_tokens": 78,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005217,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.000195,
+                  "upstream_inference_cost": 0.0005217,
+                  "upstream_inference_prompt_cost": 0.0003267
+                },
+                "is_byok": false,
+                "prompt_tokens": 1089,
+                "prompt_tokens_details": {
+                  "audio_tokens": 875,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1167
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 3.29,
+              "speech_ratio": 0.366126177664158
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        },
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": true,
+            "background_noise_severity": "medium",
+            "background_noise_type": "sharp static",
+            "confidence": 0.9,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": true
+          },
+          "cost_usd": 0.0005229,
+          "file": "call_003.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 2750740,
+            "dsp": {
+              "bandwidth_hz": 1443.1402658395498,
+              "clipping_ratio": 1.0906156161614693e-05,
+              "crest_factor": 8.764653256820573,
+              "dbfs": -18.854694788223924,
+              "dc_offset": -2.3212969608721323e-06,
+              "duration_seconds": 171.92125,
+              "peak_abs": 1.0,
+              "rms": 0.11409464478492737,
+              "spectral_centroid_hz": 1512.5767039290831,
+              "spectral_flatness": 0.3373891185587147,
+              "zcr": 0.12895443733483983
+            },
+            "elapsed_seconds": 6.496702833006566,
+            "events_backend": "dsp_proxy",
+            "fusion": {
+              "audio_quality_owner": "P0",
+              "long_silence_owner": "P0",
+              "noise_owner": "P0_when_signature_present_else_P4",
+              "semantic_owner": "P4"
+            },
+            "input_bytes": 2791833,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 171.927771,
+            "input_sample_rate_hz": 48000,
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 603.625,
+            "pipeline": "P5",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005229,
+              "estimated_cost_usd": 0.002905,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.9,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": true
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.001586,
+              "usage": {
+                "completion_tokens": 78,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005229,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.000195,
+                  "upstream_inference_cost": 0.0005229,
+                  "upstream_inference_prompt_cost": 0.0003279
+                },
+                "is_byok": false,
+                "prompt_tokens": 4513,
+                "prompt_tokens_details": {
+                  "audio_tokens": 4299,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 3800,
+                  "video_tokens": 0
+                },
+                "total_tokens": 4591
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 7.329999999999998,
+              "speech_ratio": 0.6209238241345967
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        }
+      ],
+      "mean_elapsed_seconds": 4.8124172496706406,
+      "peak_rss_mb": 603.625,
+      "status": "complete",
+      "total_audio_minutes": 3.9640180666666667,
+      "total_cost_usd": 0.001586
+    },
+    {
+      "average_field_accuracy": 0.875,
+      "candidate_id": "P6",
+      "completed_count": 3,
+      "cost_per_audio_minute_usd": 0.0006896537689846721,
+      "exact_match_rate": 0.3333333333333333,
+      "field_accuracy": {
+        "audio_quality": 1.0,
+        "background_noise_present": 1.0,
+        "background_noise_severity": 1.0,
+        "background_noise_type": 1.0,
+        "emotional_intensity": 0.6666666666666666,
+        "emotional_tone": 1.0,
+        "long_silence_present": 1.0,
+        "speaker_overlap_present": 0.3333333333333333
+      },
+      "file_count": 3,
+      "files": [
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": false,
+            "background_noise_severity": "none",
+            "background_noise_type": "",
+            "confidence": 0.95,
+            "emotional_intensity": "high",
+            "emotional_tone": "upset",
+            "long_silence_present": false,
+            "speaker_overlap_present": false
+          },
+          "cost_usd": 0.0005445,
+          "file": "call_001.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 495035,
+            "dsp": {
+              "bandwidth_hz": 1053.714660556191,
+              "clipping_ratio": 2.0200591877342008e-06,
+              "crest_factor": 8.535137155007531,
+              "dbfs": -18.624475164014772,
+              "dc_offset": 3.1272450087271864e-06,
+              "duration_seconds": 30.9396875,
+              "peak_abs": 0.999969482421875,
+              "rms": 0.1171591579914093,
+              "spectral_centroid_hz": 1188.293748760761,
+              "spectral_flatness": 0.18365409800169483,
+              "zcr": 0.12473082656948815
+            },
+            "elapsed_seconds": 7.299588374997256,
+            "events_backend": "dsp_proxy",
+            "fusion": {
+              "audio_quality_owner": "P0",
+              "long_silence_owner": "P0",
+              "noise_owner": "P0_when_signature_present_else_P4",
+              "semantic_owner": "P4"
+            },
+            "input_bytes": 503444,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 30.946188,
+            "input_sample_rate_hz": 48000,
+            "local_specialists": {
+              "local_semantics_applied": true,
+              "p3_prosody_evidence": {
+                "backend": "dsp_proxy",
+                "dynamic": false,
+                "high_intensity": true,
+                "loud": true,
+                "mapped_intensity": "high",
+                "noisy": false,
+                "note": "Not a replacement for a validated emotion model."
+              },
+              "p3_semantic_evidence": {
+                "backend": "whisper_lexical_rules",
+                "final_intensity": "high",
+                "frustrated_terms": [],
+                "lexical_intensity": "high",
+                "repeated_hello_count": 8,
+                "satisfied_terms": [],
+                "upset_terms": []
+              },
+              "p3_transcript": {
+                "backend": "faster_whisper_cpu_int8",
+                "duration_seconds": 30.9396875,
+                "language": "en",
+                "model_size": "tiny",
+                "segments": [
+                  {
+                    "end_seconds": 7.0,
+                    "start_seconds": 0.0,
+                    "text": "Hi, I'm Erica from Toyota of BrainTree. How can I help?"
+                  },
+                  {
+                    "end_seconds": 12.0,
+                    "start_seconds": 7.0,
+                    "text": "Yes, hi. Are you a real person?"
+                  },
+                  {
+                    "end_seconds": 27.0,
+                    "start_seconds": 12.0,
+                    "text": "Hello. Hello. Hello. Hello. Hello. Hello. Hello."
+                  },
+                  {
+                    "end_seconds": 31.0,
+                    "start_seconds": 27.0,
+                    "text": "Hello. I'm here. How can I help you with your vehicle?"
+                  }
+                ],
+                "text": "Hi, I'm Erica from Toyota of BrainTree. How can I help? Yes, hi. Are you a real person? Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. I'm here. How can I help you with your vehicle?"
+              }
+            },
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 766.203125,
+            "pipeline": "P6",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005445,
+              "estimated_cost_usd": 0.0015514,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.95,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": true,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0005445,
+              "usage": {
+                "completion_tokens": 99,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005445,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.0002475,
+                  "upstream_inference_cost": 0.0005445,
+                  "upstream_inference_prompt_cost": 0.000297
+                },
+                "is_byok": false,
+                "prompt_tokens": 990,
+                "prompt_tokens_details": {
+                  "audio_tokens": 774,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1089
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 2.8999999999999986,
+              "speech_ratio": 0.3703980526629433
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        },
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": true,
+            "background_noise_severity": "medium",
+            "background_noise_type": "TV",
+            "confidence": 0.9,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": false
+          },
+          "cost_usd": 0.0005723,
+          "file": "call_002.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 559370,
+            "dsp": {
+              "bandwidth_hz": 1104.8399328467735,
+              "clipping_ratio": 0.0,
+              "crest_factor": 13.80761162447983,
+              "dbfs": -27.09946027868245,
+              "dc_offset": -9.657688906372641e-07,
+              "duration_seconds": 34.960625,
+              "peak_abs": 0.6097412109375,
+              "rms": 0.04415978863835335,
+              "spectral_centroid_hz": 1115.0220519243298,
+              "spectral_flatness": 0.17974054785309124,
+              "zcr": 0.13166621675495066
+            },
+            "elapsed_seconds": 7.542497708003793,
+            "events_backend": "dsp_proxy",
+            "fusion": {
+              "audio_quality_owner": "P0",
+              "long_silence_owner": "P0",
+              "noise_owner": "P0_when_signature_present_else_P4",
+              "semantic_owner": "P4"
+            },
+            "input_bytes": 568799,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 34.967125,
+            "input_sample_rate_hz": 48000,
+            "local_specialists": {
+              "local_semantics_applied": false,
+              "p3_prosody_evidence": {
+                "backend": "dsp_proxy",
+                "dynamic": true,
+                "high_intensity": false,
+                "loud": false,
+                "mapped_intensity": "medium",
+                "noisy": false,
+                "note": "Not a replacement for a validated emotion model."
+              },
+              "p3_semantic_evidence": {
+                "backend": "whisper_lexical_rules",
+                "final_intensity": "medium",
+                "frustrated_terms": [],
+                "lexical_intensity": "low",
+                "repeated_hello_count": 0,
+                "satisfied_terms": [],
+                "upset_terms": []
+              },
+              "p3_transcript": {
+                "backend": "faster_whisper_cpu_int8",
+                "duration_seconds": 34.960625,
+                "language": "en",
+                "model_size": "tiny",
+                "segments": [
+                  {
+                    "end_seconds": 7.24,
+                    "start_seconds": 0.0,
+                    "text": "Hi, I'm Erica from Toyota of Brain Tree."
+                  },
+                  {
+                    "end_seconds": 9.0,
+                    "start_seconds": 7.24,
+                    "text": "How can I help?"
+                  },
+                  {
+                    "end_seconds": 12.0,
+                    "start_seconds": 9.0,
+                    "text": "Spanish, please."
+                  },
+                  {
+                    "end_seconds": 18.84,
+                    "start_seconds": 12.0,
+                    "text": "Hola soy Erica de Toyota de Brain Tree."
+                  },
+                  {
+                    "end_seconds": 21.04,
+                    "start_seconds": 18.84,
+                    "text": "Como puedo ayudarle?"
+                  },
+                  {
+                    "end_seconds": 28.04,
+                    "start_seconds": 21.04,
+                    "text": "Spanish, Mama Webu."
+                  }
+                ],
+                "text": "Hi, I'm Erica from Toyota of Brain Tree. How can I help? Spanish, please. Hola soy Erica de Toyota de Brain Tree. Como puedo ayudarle? Spanish, Mama Webu."
+              }
+            },
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 766.203125,
+            "pipeline": "P6",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005723,
+              "estimated_cost_usd": 0.0015901,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.9,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0011167999999999998,
+              "usage": {
+                "completion_tokens": 98,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005723,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.000245,
+                  "upstream_inference_cost": 0.0005723,
+                  "upstream_inference_prompt_cost": 0.0003273
+                },
+                "is_byok": false,
+                "prompt_tokens": 1091,
+                "prompt_tokens_details": {
+                  "audio_tokens": 875,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1189
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 3.29,
+              "speech_ratio": 0.366126177664158
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        },
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": true,
+            "background_noise_severity": "medium",
+            "background_noise_type": "sharp static",
+            "confidence": 0.95,
+            "emotional_intensity": "medium",
+            "emotional_tone": "satisfied",
+            "long_silence_present": false,
+            "speaker_overlap_present": false
+          },
+          "cost_usd": 0.001617,
+          "file": "call_003.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 2750740,
+            "dsp": {
+              "bandwidth_hz": 1443.1402658395498,
+              "clipping_ratio": 1.0906156161614693e-05,
+              "crest_factor": 8.764653256820573,
+              "dbfs": -18.854694788223924,
+              "dc_offset": -2.3212969608721323e-06,
+              "duration_seconds": 171.92125,
+              "peak_abs": 1.0,
+              "rms": 0.11409464478492737,
+              "spectral_centroid_hz": 1512.5767039290831,
+              "spectral_flatness": 0.3373891185587147,
+              "zcr": 0.12895443733483983
+            },
+            "elapsed_seconds": 15.495729374997609,
+            "events_backend": "dsp_proxy",
+            "fusion": {
+              "audio_quality_owner": "P0",
+              "long_silence_owner": "P0",
+              "noise_owner": "P0_when_signature_present_else_P4",
+              "semantic_owner": "P4"
+            },
+            "input_bytes": 2791833,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 171.927771,
+            "input_sample_rate_hz": 48000,
+            "local_specialists": {
+              "local_semantics_applied": true,
+              "p3_prosody_evidence": {
+                "backend": "dsp_proxy",
+                "dynamic": false,
+                "high_intensity": false,
+                "loud": true,
+                "mapped_intensity": "medium",
+                "noisy": true,
+                "note": "Not a replacement for a validated emotion model."
+              },
+              "p3_semantic_evidence": {
+                "backend": "whisper_lexical_rules",
+                "final_intensity": "medium",
+                "frustrated_terms": [],
+                "lexical_intensity": "medium",
+                "repeated_hello_count": 0,
+                "satisfied_terms": [
+                  "thank"
+                ],
+                "upset_terms": []
+              },
+              "p3_transcript": {
+                "backend": "faster_whisper_cpu_int8",
+                "duration_seconds": 171.92125,
+                "language": "en",
+                "model_size": "tiny",
+                "segments": [
+                  {
+                    "end_seconds": 7.5,
+                    "start_seconds": 0.0,
+                    "text": "Hi, I'm Erica from Lexington, Toyota."
+                  },
+                  {
+                    "end_seconds": 9.5,
+                    "start_seconds": 7.5,
+                    "text": "How can I help?"
+                  },
+                  {
+                    "end_seconds": 14.74,
+                    "start_seconds": 9.5,
+                    "text": "Erica, I want to get an appointment for my car, please."
+                  },
+                  {
+                    "end_seconds": 16.22,
+                    "start_seconds": 14.74,
+                    "text": "I can help with that."
+                  },
+                  {
+                    "end_seconds": 18.86,
+                    "start_seconds": 16.22,
+                    "text": "What type of service do you need?"
+                  },
+                  {
+                    "end_seconds": 29.060000000000002,
+                    "start_seconds": 18.86,
+                    "text": "I need to have an ordinary check-up once every, what, four months or six months check-up."
+                  },
+                  {
+                    "end_seconds": 37.900000000000006,
+                    "start_seconds": 29.060000000000002,
+                    "text": "And I want to leave it at the Toyota tomorrow, Saturday, the 4th of July."
+                  },
+                  {
+                    "end_seconds": 39.940000000000005,
+                    "start_seconds": 37.900000000000006,
+                    "text": "I know you will not be open."
+                  },
+                  {
+                    "end_seconds": 43.940000000000005,
+                    "start_seconds": 39.940000000000005,
+                    "text": "I just want to leave it and I'll leave it with the paperwork."
+                  },
+                  {
+                    "end_seconds": 49.34,
+                    "start_seconds": 43.940000000000005,
+                    "text": "And I will pick it up on Monday."
+                  },
+                  {
+                    "end_seconds": 65.4,
+                    "start_seconds": 49.6,
+                    "text": "I will pick it up on Monday 12th of 13th of July."
+                  },
+                  {
+                    "end_seconds": 67.4,
+                    "start_seconds": 65.4,
+                    "text": "Yes."
+                  },
+                  {
+                    "end_seconds": 72.54,
+                    "start_seconds": 67.4,
+                    "text": "Just so you're aware, the dealership is closed on July 3rd and 4th for Independence Day."
+                  },
+                  {
+                    "end_seconds": 76.14,
+                    "start_seconds": 72.54,
+                    "text": "So dropping off your car or picking it up then won't be possible."
+                  },
+                  {
+                    "end_seconds": 81.54,
+                    "start_seconds": 76.14,
+                    "text": "So when you say an ordinary check-up, is there anything else you would like us to look at?"
+                  },
+                  {
+                    "end_seconds": 89.98,
+                    "start_seconds": 81.54,
+                    "text": "No, I just want the information on the face changed."
+                  },
+                  {
+                    "end_seconds": 94.58,
+                    "start_seconds": 89.98,
+                    "text": "It doesn't give me the information I need, which when I want it."
+                  },
+                  {
+                    "end_seconds": 97.58,
+                    "start_seconds": 94.58,
+                    "text": "And they can do that easily."
+                  },
+                  {
+                    "end_seconds": 101.98,
+                    "start_seconds": 97.58,
+                    "text": "I would write it out with the instructions."
+                  },
+                  {
+                    "end_seconds": 102.98,
+                    "start_seconds": 102.06,
+                    "text": "Okay."
+                  },
+                  {
+                    "end_seconds": 107.26,
+                    "start_seconds": 102.98,
+                    "text": "So just to confirm, you need an ordinary check-up and something changed on an information"
+                  },
+                  {
+                    "end_seconds": 108.26,
+                    "start_seconds": 107.26,
+                    "text": "distance."
+                  },
+                  {
+                    "end_seconds": 109.26,
+                    "start_seconds": 108.26,
+                    "text": "Okay."
+                  },
+                  {
+                    "end_seconds": 111.74000000000001,
+                    "start_seconds": 109.26,
+                    "text": "Is there any doubts about how I pull up your info?"
+                  },
+                  {
+                    "end_seconds": 112.74000000000001,
+                    "start_seconds": 111.74000000000001,
+                    "text": "That's right."
+                  },
+                  {
+                    "end_seconds": 126.7,
+                    "start_seconds": 112.74000000000001,
+                    "text": "I'm going to be out of the country for eight days."
+                  },
+                  {
+                    "end_seconds": 131.66,
+                    "start_seconds": 126.7,
+                    "text": "And so there's no point in trying to reach me."
+                  },
+                  {
+                    "end_seconds": 135.62,
+                    "start_seconds": 131.66,
+                    "text": "Unfortunately, you won't be able to drop off your car or pick it up between July 3rd"
+                  },
+                  {
+                    "end_seconds": 138.14,
+                    "start_seconds": 135.62,
+                    "text": "and 4th, even with written instructions."
+                  },
+                  {
+                    "end_seconds": 139.38,
+                    "start_seconds": 138.14,
+                    "text": "As we won't be open."
+                  },
+                  {
+                    "end_seconds": 141.82,
+                    "start_seconds": 139.38,
+                    "text": "I would recommend scheduling it."
+                  },
+                  {
+                    "end_seconds": 143.82,
+                    "start_seconds": 141.82,
+                    "text": "Yeah."
+                  },
+                  {
+                    "end_seconds": 145.82,
+                    "start_seconds": 143.82,
+                    "text": "I would like that."
+                  },
+                  {
+                    "end_seconds": 151.9,
+                    "start_seconds": 145.82,
+                    "text": "Could I drop it off on Sunday?"
+                  },
+                  {
+                    "end_seconds": 155.94,
+                    "start_seconds": 151.9,
+                    "text": "The dealership is closed on Sundays, so dropping it off then won't be possible."
+                  },
+                  {
+                    "end_seconds": 159.66,
+                    "start_seconds": 155.94,
+                    "text": "And you won't be able to pick it up or drop it off on July 3rd or 4th either."
+                  },
+                  {
+                    "end_seconds": 161.26,
+                    "start_seconds": 159.66,
+                    "text": "You'll need to pick a different day."
+                  },
+                  {
+                    "end_seconds": 162.26,
+                    "start_seconds": 161.26,
+                    "text": "Did you want to transfer to an advice?"
+                  },
+                  {
+                    "end_seconds": 163.26,
+                    "start_seconds": 162.26,
+                    "text": "Okay."
+                  },
+                  {
+                    "end_seconds": 164.26,
+                    "start_seconds": 163.26,
+                    "text": "Yes, I do."
+                  },
+                  {
+                    "end_seconds": 165.26,
+                    "start_seconds": 164.26,
+                    "text": "Yep."
+                  },
+                  {
+                    "end_seconds": 171.26,
+                    "start_seconds": 165.26,
+                    "text": "One moment, transferring you to an advisor now."
+                  },
+                  {
+                    "end_seconds": 171.66,
+                    "start_seconds": 171.26,
+                    "text": "Thank you."
+                  }
+                ],
+                "text": "Hi, I'm Erica from Lexington, Toyota. How can I help? Erica, I want to get an appointment for my car, please. I can help with that. What type of service do you need? I need to have an ordinary check-up once every, what, four months or six months check-up. And I want to leave it at the Toyota tomorrow, Saturday, the 4th of July. I know you will not be open. I just want to leave it and I'll leave it with the paperwork. And I will pick it up on Monday. I will pick it up on Monday 12th of 13th of July. Yes. Just so you're aware, the dealership is closed on July 3rd and 4th for Independence Day. So dropping off your car or picking it up then won't be possible. So when you say an ordinary check-up, is there anything else you would like us to look at? No, I just want the information on the face changed. It doesn't give me the information I need, which when I want it. And they can do that easily. I would write it out with the instructions. Okay. So just to confirm, you need an ordinary check-up and something changed on an information distance. Okay. Is there any doubts about how I pull up your info? That's right. I'm going to be out of the country for eight days. And so there's no point in trying to reach me. Unfortunately, you won't be able to drop off your car or pick it up between July 3rd and 4th, even with written instructions. As we won't be open. I would recommend scheduling it. Yeah. I would like that. Could I drop it off on Sunday? The dealership is closed on Sundays, so dropping it off then won't be possible. And you won't be able to pick it up or drop it off on July 3rd or 4th either. You'll need to pick a different day. Did you want to transfer to an advice? Okay. Yes, I do. Yep. One moment, transferring you to an advisor now. Thank you."
+              }
+            },
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 957.078125,
+            "pipeline": "P6",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.001617,
+              "estimated_cost_usd": 0.002905,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "slightly_impaired",
+                "background_noise_present": true,
+                "background_noise_severity": "low",
+                "background_noise_type": "sharp static",
+                "confidence": 0.95,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0027337999999999998,
+              "usage": {
+                "completion_tokens": 105,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.001617,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.0002625,
+                  "upstream_inference_cost": 0.001617,
+                  "upstream_inference_prompt_cost": 0.0013545
+                },
+                "is_byok": false,
+                "prompt_tokens": 4515,
+                "prompt_tokens_details": {
+                  "audio_tokens": 4299,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 4620
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 7.329999999999998,
+              "speech_ratio": 0.6209238241345967
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        }
+      ],
+      "mean_elapsed_seconds": 10.11260515266622,
+      "peak_rss_mb": 957.078125,
+      "status": "complete",
+      "total_audio_minutes": 3.9640180666666667,
+      "total_cost_usd": 0.0027337999999999998
+    },
+    {
+      "average_field_accuracy": 0.9166666666666666,
+      "candidate_id": "P7",
+      "completed_count": 3,
+      "cost_per_audio_minute_usd": 0.004600685388736287,
+      "exact_match_rate": 0.6666666666666666,
+      "field_accuracy": {
+        "audio_quality": 1.0,
+        "background_noise_present": 1.0,
+        "background_noise_severity": 1.0,
+        "background_noise_type": 1.0,
+        "emotional_intensity": 0.6666666666666666,
+        "emotional_tone": 1.0,
+        "long_silence_present": 1.0,
+        "speaker_overlap_present": 0.6666666666666666
+      },
+      "file_count": 3,
+      "files": [
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": false,
+            "background_noise_severity": "none",
+            "background_noise_type": "",
+            "confidence": 0.95,
+            "emotional_intensity": "high",
+            "emotional_tone": "upset",
+            "long_silence_present": false,
+            "speaker_overlap_present": false
+          },
+          "cost_usd": 0.0052155,
+          "file": "call_001.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 495035,
+            "dsp": {
+              "bandwidth_hz": 1053.714660556191,
+              "clipping_ratio": 2.0200591877342008e-06,
+              "crest_factor": 8.535137155007531,
+              "dbfs": -18.624475164014772,
+              "dc_offset": 3.1272450087271864e-06,
+              "duration_seconds": 30.9396875,
+              "peak_abs": 0.999969482421875,
+              "rms": 0.1171591579914093,
+              "spectral_centroid_hz": 1188.293748760761,
+              "spectral_flatness": 0.18365409800169483,
+              "zcr": 0.12473082656948815
+            },
+            "elapsed_seconds": 10.358861832995899,
+            "events_backend": "dsp_proxy",
+            "fusion": {
+              "audio_quality_owner": "P0",
+              "long_silence_owner": "P0",
+              "noise_owner": "P0_when_signature_present_else_P4",
+              "semantic_owner": "P4"
+            },
+            "input_bytes": 503444,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 30.946188,
+            "input_sample_rate_hz": 48000,
+            "local_specialists": {
+              "local_semantics_applied": true,
+              "p3_prosody_evidence": {
+                "backend": "dsp_proxy",
+                "dynamic": false,
+                "high_intensity": true,
+                "loud": true,
+                "mapped_intensity": "high",
+                "noisy": false,
+                "note": "Not a replacement for a validated emotion model."
+              },
+              "p3_semantic_evidence": {
+                "backend": "whisper_lexical_rules",
+                "final_intensity": "high",
+                "frustrated_terms": [],
+                "lexical_intensity": "high",
+                "repeated_hello_count": 8,
+                "satisfied_terms": [],
+                "upset_terms": []
+              },
+              "p3_transcript": {
+                "backend": "faster_whisper_cpu_int8",
+                "duration_seconds": 30.9396875,
+                "language": "en",
+                "model_size": "tiny",
+                "segments": [
+                  {
+                    "end_seconds": 7.0,
+                    "start_seconds": 0.0,
+                    "text": "Hi, I'm Erica from Toyota of BrainTree. How can I help?"
+                  },
+                  {
+                    "end_seconds": 12.0,
+                    "start_seconds": 7.0,
+                    "text": "Yes, hi. Are you a real person?"
+                  },
+                  {
+                    "end_seconds": 27.0,
+                    "start_seconds": 12.0,
+                    "text": "Hello. Hello. Hello. Hello. Hello. Hello. Hello."
+                  },
+                  {
+                    "end_seconds": 31.0,
+                    "start_seconds": 27.0,
+                    "text": "Hello. I'm here. How can I help you with your vehicle?"
+                  }
+                ],
+                "text": "Hi, I'm Erica from Toyota of BrainTree. How can I help? Yes, hi. Are you a real person? Hello. Hello. Hello. Hello. Hello. Hello. Hello. Hello. I'm here. How can I help you with your vehicle?"
+              }
+            },
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 957.078125,
+            "pipeline": "P7",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005445,
+              "estimated_cost_usd": 0.0015514,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.95,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": true,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0005445,
+              "usage": {
+                "completion_tokens": 99,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005445,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.0002475,
+                  "upstream_inference_cost": 0.0005445,
+                  "upstream_inference_prompt_cost": 0.000297
+                },
+                "is_byok": false,
+                "prompt_tokens": 990,
+                "prompt_tokens_details": {
+                  "audio_tokens": 774,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1089
+              }
+            },
+            "silero_model_used": false,
+            "text_adjudication": {
+              "actual_cost_usd": 0.004671,
+              "estimated_cost_usd": 0.009648,
+              "model": "google/gemini-3.6-flash",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.95,
+                "emotional_intensity": "high",
+                "emotional_tone": "upset",
+                "long_silence_present": false,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p7-openrouter-text-v1",
+              "spent_usd": 0.004671,
+              "usage": {
+                "completion_tokens": 511,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 445
+                },
+                "cost": 0.004671,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.0038325,
+                  "upstream_inference_cost": 0.004671,
+                  "upstream_inference_prompt_cost": 0.0008385
+                },
+                "is_byok": false,
+                "prompt_tokens": 559,
+                "prompt_tokens_details": {
+                  "audio_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1070
+              }
+            },
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 2.8999999999999986,
+              "speech_ratio": 0.3703980526629433
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        },
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": true,
+            "background_noise_severity": "medium",
+            "background_noise_type": "TV",
+            "confidence": 0.95,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": false
+          },
+          "cost_usd": 0.0057173,
+          "file": "call_002.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 559370,
+            "dsp": {
+              "bandwidth_hz": 1104.8399328467735,
+              "clipping_ratio": 0.0,
+              "crest_factor": 13.80761162447983,
+              "dbfs": -27.09946027868245,
+              "dc_offset": -9.657688906372641e-07,
+              "duration_seconds": 34.960625,
+              "peak_abs": 0.6097412109375,
+              "rms": 0.04415978863835335,
+              "spectral_centroid_hz": 1115.0220519243298,
+              "spectral_flatness": 0.17974054785309124,
+              "zcr": 0.13166621675495066
+            },
+            "elapsed_seconds": 11.331889875000343,
+            "events_backend": "dsp_proxy",
+            "fusion": {
+              "audio_quality_owner": "P0",
+              "long_silence_owner": "P0",
+              "noise_owner": "P0_when_signature_present_else_P4",
+              "semantic_owner": "P4"
+            },
+            "input_bytes": 568799,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 34.967125,
+            "input_sample_rate_hz": 48000,
+            "local_specialists": {
+              "local_semantics_applied": false,
+              "p3_prosody_evidence": {
+                "backend": "dsp_proxy",
+                "dynamic": true,
+                "high_intensity": false,
+                "loud": false,
+                "mapped_intensity": "medium",
+                "noisy": false,
+                "note": "Not a replacement for a validated emotion model."
+              },
+              "p3_semantic_evidence": {
+                "backend": "whisper_lexical_rules",
+                "final_intensity": "medium",
+                "frustrated_terms": [],
+                "lexical_intensity": "low",
+                "repeated_hello_count": 0,
+                "satisfied_terms": [],
+                "upset_terms": []
+              },
+              "p3_transcript": {
+                "backend": "faster_whisper_cpu_int8",
+                "duration_seconds": 34.960625,
+                "language": "en",
+                "model_size": "tiny",
+                "segments": [
+                  {
+                    "end_seconds": 7.24,
+                    "start_seconds": 0.0,
+                    "text": "Hi, I'm Erica from Toyota of Brain Tree."
+                  },
+                  {
+                    "end_seconds": 9.0,
+                    "start_seconds": 7.24,
+                    "text": "How can I help?"
+                  },
+                  {
+                    "end_seconds": 12.0,
+                    "start_seconds": 9.0,
+                    "text": "Spanish, please."
+                  },
+                  {
+                    "end_seconds": 18.84,
+                    "start_seconds": 12.0,
+                    "text": "Hola soy Erica de Toyota de Brain Tree."
+                  },
+                  {
+                    "end_seconds": 21.04,
+                    "start_seconds": 18.84,
+                    "text": "Como puedo ayudarle?"
+                  },
+                  {
+                    "end_seconds": 28.04,
+                    "start_seconds": 22.04,
+                    "text": "Spanish, Mama Webu."
+                  },
+                  {
+                    "end_seconds": 31.04,
+                    "start_seconds": 28.04,
+                    "text": "Spanish, Mama Webu."
+                  }
+                ],
+                "text": "Hi, I'm Erica from Toyota of Brain Tree. How can I help? Spanish, please. Hola soy Erica de Toyota de Brain Tree. Como puedo ayudarle? Spanish, Mama Webu. Spanish, Mama Webu."
+              }
+            },
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 957.078125,
+            "pipeline": "P7",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005798,
+              "estimated_cost_usd": 0.0015901,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": true,
+                "background_noise_severity": "low",
+                "background_noise_type": "hum",
+                "confidence": 0.95,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0011243,
+              "usage": {
+                "completion_tokens": 101,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005798,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.0002525,
+                  "upstream_inference_cost": 0.0005798,
+                  "upstream_inference_prompt_cost": 0.0003273
+                },
+                "is_byok": false,
+                "prompt_tokens": 1091,
+                "prompt_tokens_details": {
+                  "audio_tokens": 875,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1192
+              }
+            },
+            "silero_model_used": false,
+            "text_adjudication": {
+              "actual_cost_usd": 0.0051375,
+              "estimated_cost_usd": 0.00963,
+              "model": "google/gemini-3.6-flash",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": true,
+                "background_noise_severity": "medium",
+                "background_noise_type": "TV",
+                "confidence": 0.95,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p7-openrouter-text-v1",
+              "spent_usd": 0.0098085,
+              "usage": {
+                "completion_tokens": 582,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 515
+                },
+                "cost": 0.0051375,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.004365,
+                  "upstream_inference_cost": 0.0051375,
+                  "upstream_inference_prompt_cost": 0.0007725
+                },
+                "is_byok": false,
+                "prompt_tokens": 515,
+                "prompt_tokens_details": {
+                  "audio_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1097
+              }
+            },
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 3.29,
+              "speech_ratio": 0.366126177664158
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        },
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": true,
+            "background_noise_severity": "medium",
+            "background_noise_type": "sharp static",
+            "confidence": 0.9,
+            "emotional_intensity": "medium",
+            "emotional_tone": "satisfied",
+            "long_silence_present": false,
+            "speaker_overlap_present": true
+          },
+          "cost_usd": 0.0073044,
+          "file": "call_003.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 2750740,
+            "dsp": {
+              "bandwidth_hz": 1443.1402658395498,
+              "clipping_ratio": 1.0906156161614693e-05,
+              "crest_factor": 8.764653256820573,
+              "dbfs": -18.854694788223924,
+              "dc_offset": -2.3212969608721323e-06,
+              "duration_seconds": 171.92125,
+              "peak_abs": 1.0,
+              "rms": 0.11409464478492737,
+              "spectral_centroid_hz": 1512.5767039290831,
+              "spectral_flatness": 0.3373891185587147,
+              "zcr": 0.12895443733483983
+            },
+            "elapsed_seconds": 15.03098024999781,
+            "events_backend": "dsp_proxy",
+            "fusion": {
+              "audio_quality_owner": "P0",
+              "long_silence_owner": "P0",
+              "noise_owner": "P0_when_signature_present_else_P4",
+              "semantic_owner": "P4"
+            },
+            "input_bytes": 2791833,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 171.927771,
+            "input_sample_rate_hz": 48000,
+            "local_specialists": {
+              "local_semantics_applied": true,
+              "p3_prosody_evidence": {
+                "backend": "dsp_proxy",
+                "dynamic": false,
+                "high_intensity": false,
+                "loud": true,
+                "mapped_intensity": "medium",
+                "noisy": true,
+                "note": "Not a replacement for a validated emotion model."
+              },
+              "p3_semantic_evidence": {
+                "backend": "whisper_lexical_rules",
+                "final_intensity": "medium",
+                "frustrated_terms": [],
+                "lexical_intensity": "medium",
+                "repeated_hello_count": 0,
+                "satisfied_terms": [
+                  "thank"
+                ],
+                "upset_terms": []
+              },
+              "p3_transcript": {
+                "backend": "faster_whisper_cpu_int8",
+                "duration_seconds": 171.92125,
+                "language": "en",
+                "model_size": "tiny",
+                "segments": [
+                  {
+                    "end_seconds": 7.5,
+                    "start_seconds": 0.0,
+                    "text": "Hi, I'm Erica from Lexington, Toyota."
+                  },
+                  {
+                    "end_seconds": 9.5,
+                    "start_seconds": 7.5,
+                    "text": "How can I help?"
+                  },
+                  {
+                    "end_seconds": 14.74,
+                    "start_seconds": 9.5,
+                    "text": "Erica, I want to get an appointment for my car, please."
+                  },
+                  {
+                    "end_seconds": 16.22,
+                    "start_seconds": 14.74,
+                    "text": "I can help with that."
+                  },
+                  {
+                    "end_seconds": 18.86,
+                    "start_seconds": 16.22,
+                    "text": "What type of service do you need?"
+                  },
+                  {
+                    "end_seconds": 29.060000000000002,
+                    "start_seconds": 18.86,
+                    "text": "I need to have an ordinary check-up once every, what, four months or six months check-up."
+                  },
+                  {
+                    "end_seconds": 37.900000000000006,
+                    "start_seconds": 29.060000000000002,
+                    "text": "And I want to leave it at the Toyota tomorrow, Saturday, the 4th of July."
+                  },
+                  {
+                    "end_seconds": 39.940000000000005,
+                    "start_seconds": 37.900000000000006,
+                    "text": "I know you will not be open."
+                  },
+                  {
+                    "end_seconds": 43.940000000000005,
+                    "start_seconds": 39.940000000000005,
+                    "text": "I just want to leave it and I'll leave it with the paperwork."
+                  },
+                  {
+                    "end_seconds": 49.34,
+                    "start_seconds": 43.940000000000005,
+                    "text": "And I will pick it up on Monday."
+                  },
+                  {
+                    "end_seconds": 65.4,
+                    "start_seconds": 49.6,
+                    "text": "I will pick it up on Monday 12th of 13th of July."
+                  },
+                  {
+                    "end_seconds": 67.4,
+                    "start_seconds": 65.4,
+                    "text": "Yes."
+                  },
+                  {
+                    "end_seconds": 72.54,
+                    "start_seconds": 67.4,
+                    "text": "Just so you're aware, the dealership is closed on July 3rd and 4th for Independence Day."
+                  },
+                  {
+                    "end_seconds": 76.14,
+                    "start_seconds": 72.54,
+                    "text": "So dropping off your car or picking it up then won't be possible."
+                  },
+                  {
+                    "end_seconds": 81.54,
+                    "start_seconds": 76.14,
+                    "text": "So when you say an ordinary check-up, is there anything else you would like us to look at?"
+                  },
+                  {
+                    "end_seconds": 89.98,
+                    "start_seconds": 81.54,
+                    "text": "No, I just want the information on the face changed."
+                  },
+                  {
+                    "end_seconds": 94.58,
+                    "start_seconds": 89.98,
+                    "text": "It doesn't give me the information I need, which when I want it."
+                  },
+                  {
+                    "end_seconds": 97.58,
+                    "start_seconds": 94.58,
+                    "text": "And they can do that easily."
+                  },
+                  {
+                    "end_seconds": 101.98,
+                    "start_seconds": 97.58,
+                    "text": "I would write it out with the instructions."
+                  },
+                  {
+                    "end_seconds": 102.98,
+                    "start_seconds": 102.06,
+                    "text": "Okay."
+                  },
+                  {
+                    "end_seconds": 107.26,
+                    "start_seconds": 102.98,
+                    "text": "So just to confirm, you need an ordinary check-up and something changed on an information"
+                  },
+                  {
+                    "end_seconds": 108.26,
+                    "start_seconds": 107.26,
+                    "text": "distance."
+                  },
+                  {
+                    "end_seconds": 109.26,
+                    "start_seconds": 108.26,
+                    "text": "Okay."
+                  },
+                  {
+                    "end_seconds": 111.74000000000001,
+                    "start_seconds": 109.26,
+                    "text": "Is there any doubts about how I pull up your info?"
+                  },
+                  {
+                    "end_seconds": 112.74000000000001,
+                    "start_seconds": 111.74000000000001,
+                    "text": "That's right."
+                  },
+                  {
+                    "end_seconds": 126.7,
+                    "start_seconds": 112.74000000000001,
+                    "text": "I'm going to be out of the country for eight days."
+                  },
+                  {
+                    "end_seconds": 131.66,
+                    "start_seconds": 126.7,
+                    "text": "And so there's no point in trying to reach me."
+                  },
+                  {
+                    "end_seconds": 135.62,
+                    "start_seconds": 131.66,
+                    "text": "Unfortunately, you won't be able to drop off your car or pick it up between July 3rd"
+                  },
+                  {
+                    "end_seconds": 138.14,
+                    "start_seconds": 135.62,
+                    "text": "and 4th, even with written instructions."
+                  },
+                  {
+                    "end_seconds": 139.38,
+                    "start_seconds": 138.14,
+                    "text": "As we won't be open."
+                  },
+                  {
+                    "end_seconds": 141.82,
+                    "start_seconds": 139.38,
+                    "text": "I would recommend scheduling it."
+                  },
+                  {
+                    "end_seconds": 143.82,
+                    "start_seconds": 141.82,
+                    "text": "Yeah."
+                  },
+                  {
+                    "end_seconds": 145.82,
+                    "start_seconds": 143.82,
+                    "text": "I would like that."
+                  },
+                  {
+                    "end_seconds": 151.9,
+                    "start_seconds": 145.82,
+                    "text": "Could I drop it off on Sunday?"
+                  },
+                  {
+                    "end_seconds": 155.94,
+                    "start_seconds": 151.9,
+                    "text": "The dealership is closed on Sundays, so dropping it off then won't be possible."
+                  },
+                  {
+                    "end_seconds": 159.66,
+                    "start_seconds": 155.94,
+                    "text": "And you won't be able to pick it up or drop it off on July 3rd or 4th either."
+                  },
+                  {
+                    "end_seconds": 161.26,
+                    "start_seconds": 159.66,
+                    "text": "You'll need to pick a different day."
+                  },
+                  {
+                    "end_seconds": 162.26,
+                    "start_seconds": 161.26,
+                    "text": "Did you want to transfer to an advice?"
+                  },
+                  {
+                    "end_seconds": 163.26,
+                    "start_seconds": 162.26,
+                    "text": "Okay."
+                  },
+                  {
+                    "end_seconds": 164.26,
+                    "start_seconds": 163.26,
+                    "text": "Yes, I do."
+                  },
+                  {
+                    "end_seconds": 165.26,
+                    "start_seconds": 164.26,
+                    "text": "Yep."
+                  },
+                  {
+                    "end_seconds": 171.26,
+                    "start_seconds": 165.26,
+                    "text": "One moment, transferring you to an advisor now."
+                  },
+                  {
+                    "end_seconds": 171.66,
+                    "start_seconds": 171.26,
+                    "text": "Thank you."
+                  }
+                ],
+                "text": "Hi, I'm Erica from Lexington, Toyota. How can I help? Erica, I want to get an appointment for my car, please. I can help with that. What type of service do you need? I need to have an ordinary check-up once every, what, four months or six months check-up. And I want to leave it at the Toyota tomorrow, Saturday, the 4th of July. I know you will not be open. I just want to leave it and I'll leave it with the paperwork. And I will pick it up on Monday. I will pick it up on Monday 12th of 13th of July. Yes. Just so you're aware, the dealership is closed on July 3rd and 4th for Independence Day. So dropping off your car or picking it up then won't be possible. So when you say an ordinary check-up, is there anything else you would like us to look at? No, I just want the information on the face changed. It doesn't give me the information I need, which when I want it. And they can do that easily. I would write it out with the instructions. Okay. So just to confirm, you need an ordinary check-up and something changed on an information distance. Okay. Is there any doubts about how I pull up your info? That's right. I'm going to be out of the country for eight days. And so there's no point in trying to reach me. Unfortunately, you won't be able to drop off your car or pick it up between July 3rd and 4th, even with written instructions. As we won't be open. I would recommend scheduling it. Yeah. I would like that. Could I drop it off on Sunday? The dealership is closed on Sundays, so dropping it off then won't be possible. And you won't be able to pick it up or drop it off on July 3rd or 4th either. You'll need to pick a different day. Did you want to transfer to an advice? Okay. Yes, I do. Yep. One moment, transferring you to an advisor now. Thank you."
+              }
+            },
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 974.53125,
+            "pipeline": "P7",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005229,
+              "estimated_cost_usd": 0.002905,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.9,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": true
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0016472,
+              "usage": {
+                "completion_tokens": 78,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005229,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.000195,
+                  "upstream_inference_cost": 0.0005229,
+                  "upstream_inference_prompt_cost": 0.0003279
+                },
+                "is_byok": false,
+                "prompt_tokens": 4513,
+                "prompt_tokens_details": {
+                  "audio_tokens": 4299,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 3800,
+                  "video_tokens": 0
+                },
+                "total_tokens": 4591
+              }
+            },
+            "silero_model_used": false,
+            "text_adjudication": {
+              "actual_cost_usd": 0.0067815,
+              "estimated_cost_usd": 0.010245,
+              "model": "google/gemini-3.6-flash",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": true,
+                "background_noise_severity": "medium",
+                "background_noise_type": "sharp static",
+                "confidence": 0.9,
+                "emotional_intensity": "medium",
+                "emotional_tone": "satisfied",
+                "long_silence_present": false,
+                "speaker_overlap_present": true
+              },
+              "prompt_version": "p7-openrouter-text-v1",
+              "spent_usd": 0.01659,
+              "usage": {
+                "completion_tokens": 714,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 613
+                },
+                "cost": 0.0067815,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.005355,
+                  "upstream_inference_cost": 0.0067815,
+                  "upstream_inference_prompt_cost": 0.0014265
+                },
+                "is_byok": false,
+                "prompt_tokens": 951,
+                "prompt_tokens_details": {
+                  "audio_tokens": 0,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1665
+              }
+            },
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 7.329999999999998,
+              "speech_ratio": 0.6209238241345967
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        }
+      ],
+      "mean_elapsed_seconds": 12.24057731933135,
+      "peak_rss_mb": 974.53125,
+      "status": "complete",
+      "total_audio_minutes": 3.9640180666666667,
+      "total_cost_usd": 0.0182372
+    }
+  ],
+  "dataset": "assignment",
+  "run_at_utc": "2026-08-01T06:32:32.292483+00:00"
+}

@@ -1,0 +1,40 @@
+# Project-local Python environment and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.DS_Store
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+secrets/
+
+# Temporary upload/audio workspaces
+tmp_audio/
+uploads/
+extracted/
+
+# Downloaded model binaries and runtime caches
+models/downloads/
+models/cache/
+models/faster-whisper/
+models/*.bin
+models/*.onnx
+models/*.tflite
+models/*.gguf
+
+# Generated runtime outputs. Curated experiment evidence is versioned.
+artifacts/*
+!artifacts/experiments/
+artifacts/experiments/*
+!artifacts/experiments/*.json
+reports/generated/
+runs/
+release/generated/

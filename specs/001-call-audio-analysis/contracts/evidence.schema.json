@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autoace.example/schemas/remote-evidence-v1.json",
+  "title": "CompactRemoteAudioEvidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["file_id", "customer_role", "field_candidates", "ambiguities"],
+  "properties": {
+    "file_id": {"type": "string", "minLength": 1},
+    "customer_role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identified", "certainty"],
+      "properties": {
+        "identified": {"type": "boolean"},
+        "certainty": {"type": "string", "enum": ["low", "medium", "high"]}
+      }
+    },
+    "field_candidates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "emotional_tone",
+        "emotional_intensity",
+        "background_noise_present",
+        "background_noise_type",
+        "background_noise_severity",
+        "audio_quality",
+        "speaker_overlap_present",
+        "long_silence_present"
+      ],
+      "properties": {
+        "emotional_tone": {
+          "type": "string",
+          "enum": ["neutral", "satisfied", "frustrated", "upset", "distressed"]
+        },
+        "emotional_intensity": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "background_noise_present": {"type": "boolean"},
+        "background_noise_type": {"type": "string"},
+        "background_noise_severity": {
+          "type": "string",
+          "enum": ["none", "low", "medium", "high"]
+        },
+        "audio_quality": {
+          "type": "string",
+          "enum": ["clear", "slightly_impaired", "severely_impaired"]
+        },
+        "speaker_overlap_present": {"type": "boolean"},
+        "long_silence_present": {"type": "boolean"}
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "kind", "start_s", "end_s"],
+        "properties": {
+          "field": {"type": "string"},
+          "kind": {"type": "string", "maxLength": 80},
+          "start_s": {"type": "number", "minimum": 0},
+          "end_s": {"type": "number", "minimum": 0}
+        }
+      }
+    },
+    "ambiguities": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {"type": "string", "maxLength": 120}
+    }
+  }
+}

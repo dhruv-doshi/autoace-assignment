@@ -1,0 +1,9 @@
+{
+  "dataset_version": "smoke-2026-08-01",
+  "smoke_only": true,
+  "items": [
+    {"name": "call_001.ogg", "group": "smoke-call-001"},
+    {"name": "call_002.ogg", "group": "smoke-call-002"},
+    {"name": "call_003.ogg", "group": "smoke-call-003"}
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "models": [
+    {
+      "name": "silero_vad.onnx",
+      "revision": "v6.0",
+      "license": "MIT",
+      "source": "https://github.com/snakers4/silero-vad",
+      "sha256": "597d30b3ec076608d059477bb14cfeffdf951bf5cae370d38f65d33bbfe82004",
+      "status": "verified"
+    },
+    {
+      "name": "faster-whisper/tiny/model.bin",
+      "revision": "d90ca5fe260221311c53c58e660288d3deb8d356",
+      "license": "MIT",
+      "source": "https://huggingface.co/Systran/faster-whisper-tiny",
+      "sha256": "dcb76c6586fc06cbdac6dd21f14cfd129cc4cdd9dce19bf4ffa62e59cbe6e6d1",
+      "status": "verified"
+    }
+  ],
+  "policy": "Artifacts are admitted only after license, revision, SHA-256, and memory gates pass."
+}

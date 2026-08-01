@@ -1,0 +1,13 @@
+{
+  "selection_metric": "macro_average_field_score",
+  "co_primary_metric": "emotional_tone_macro_f1",
+  "protected_fields": [
+    "emotional_tone",
+    "background_noise_present",
+    "audio_quality",
+    "speaker_overlap_present"
+  ],
+  "material_regression_margin": 0.02,
+  "bootstrap_resamples": 2000,
+  "final_holdout_opened": false
+}

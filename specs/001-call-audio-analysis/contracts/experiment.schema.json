@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autoace.example/schemas/experiment-run-v1.json",
+  "title": "ExperimentRun",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "experiment_id",
+    "candidate_id",
+    "candidate_revision",
+    "dataset_version",
+    "split",
+    "environment",
+    "status",
+    "gate_results"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "experiment_id": {
+      "type": "string",
+      "enum": [
+        "E00", "E01", "E02", "E03", "E04", "E05", "E06",
+        "E07", "E08", "E09", "E10", "E11", "E12", "E13"
+      ]
+    },
+    "candidate_id": {
+      "type": "string",
+      "enum": ["P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8"]
+    },
+    "candidate_revision": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "dataset_version": {"type": "string", "minLength": 1},
+    "split": {
+      "type": "string",
+      "enum": ["smoke", "development", "calibration", "holdout"]
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "python_version",
+        "venv_lock_sha256",
+        "ffmpeg_version",
+        "platform"
+      ],
+      "properties": {
+        "python_version": {"type": "string"},
+        "venv_lock_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "ffmpeg_version": {"type": "string"},
+        "platform": {"type": "string"},
+        "cpu": {"type": "string"}
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "declared",
+        "eligible",
+        "running",
+        "complete",
+        "accepted",
+        "rejected",
+        "blocked",
+        "failed"
+      ]
+    },
+    "blocked_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "data",
+          "privacy_approval",
+          "research_budget",
+          "license",
+          "model_access",
+          "cost_preflight",
+          "memory_preflight"
+        ]
+      },
+      "uniqueItems": true
+    },
+    "field_metrics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "calibration_metrics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "total_usd": {"type": "number", "minimum": 0},
+        "per_audio_minute_usd": {"type": "number", "minimum": 0},
+        "cache_hits": {"type": "integer", "minimum": 0},
+        "cache_misses": {"type": "integer", "minimum": 0}
+      }
+    },
+    "performance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "peak_rss_mb": {"type": "number", "minimum": 0},
+        "real_time_factor": {"type": "number", "minimum": 0},
+        "completion_rate": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "gate_results": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract",
+        "accuracy",
+        "cost",
+        "memory",
+        "privacy",
+        "license",
+        "reproducibility"
+      ],
+      "properties": {
+        "contract": {"type": "boolean"},
+        "accuracy": {"type": "boolean"},
+        "cost": {"type": "boolean"},
+        "memory": {"type": "boolean"},
+        "privacy": {"type": "boolean"},
+        "license": {"type": "boolean"},
+        "reproducibility": {"type": "boolean"}
+      }
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    }
+  }
+}

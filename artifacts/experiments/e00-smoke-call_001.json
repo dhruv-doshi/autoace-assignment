@@ -1,0 +1,31 @@
+{
+  "artifact_hashes": {},
+  "blocked_reasons": [],
+  "calibration_metrics": {},
+  "candidate_id": "P0",
+  "candidate_revision": "af6f10550712088fd76a8274aaf0e12bf81e492d5f19043aee3c182198719e14",
+  "cost": {},
+  "dataset_version": "smoke-2026-08-01",
+  "environment": {
+    "cpu": "arm",
+    "ffmpeg_version": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "platform": "macOS-15.6.1-arm64-arm-64bit",
+    "python_version": "3.12.13",
+    "venv_lock_sha256": "146c60ccc36a9e4711bf91418f95cead36153f78d0d28b6d65eea59225db5927"
+  },
+  "experiment_id": "E00",
+  "field_metrics": {},
+  "gate_results": {
+    "accuracy": false,
+    "contract": true,
+    "cost": true,
+    "license": true,
+    "memory": true,
+    "privacy": true,
+    "reproducibility": true
+  },
+  "performance": {},
+  "run_id": "e00-smoke-call_001",
+  "split": "smoke",
+  "status": "rejected"
+}

@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autoace.example/schemas/release-manifest-v1.json",
+  "title": "ReleaseManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "release_id",
+    "source_revision",
+    "winning_candidate",
+    "environment",
+    "models",
+    "configuration_hashes",
+    "evaluation_runs",
+    "gate_results",
+    "created_at"
+  ],
+  "properties": {
+    "release_id": {"type": "string", "minLength": 1},
+    "source_revision": {"type": "string", "minLength": 1},
+    "winning_candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_id", "revision"],
+      "properties": {
+        "candidate_id": {
+          "type": "string",
+          "enum": ["P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8"]
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "python_version",
+        "venv_lock_sha256",
+        "ffmpeg_version",
+        "target_memory_mb"
+      ],
+      "properties": {
+        "python_version": {"type": "string"},
+        "venv_lock_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "ffmpeg_version": {"type": "string"},
+        "target_memory_mb": {"type": "integer", "const": 2048},
+        "platform": {"type": "string"}
+      }
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "revision", "license", "artifact_sha256"],
+        "properties": {
+          "name": {"type": "string"},
+          "revision": {"type": "string"},
+          "license": {"type": "string"},
+          "artifact_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "remote": {"type": "boolean"}
+        }
+      }
+    },
+    "configuration_hashes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[a-f0-9]{64}$"
+      }
+    },
+    "evaluation_runs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "rejected_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["candidate_id", "reason"],
+        "properties": {
+          "candidate_id": {
+            "type": "string",
+            "enum": ["P0", "P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8"]
+          },
+          "reason": {"type": "string"}
+        }
+      }
+    },
+    "gate_results": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract",
+        "accuracy",
+        "cost",
+        "memory",
+        "privacy",
+        "license",
+        "reproducibility"
+      ],
+      "properties": {
+        "contract": {"const": true},
+        "accuracy": {"const": true},
+        "cost": {"const": true},
+        "memory": {"const": true},
+        "privacy": {"const": true},
+        "license": {"const": true},
+        "reproducibility": {"const": true}
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

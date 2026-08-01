@@ -1,0 +1,11 @@
+{
+  "approved": false,
+  "project_id": null,
+  "endpoint": null,
+  "region": null,
+  "retention_policy": "provider-default-not-accepted",
+  "deletion_required": true,
+  "research_budget_usd": "0.00",
+  "secrets_source": "environment-only",
+  "note": "Example only. Paid audio routing remains disabled until explicitly reviewed."
+}

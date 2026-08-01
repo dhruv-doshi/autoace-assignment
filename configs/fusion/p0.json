@@ -1,0 +1,12 @@
+{
+  "candidate": "P0",
+  "version": "2026-08-01",
+  "policies": {
+    "long_silence_seconds": 3.0,
+    "quality_clipping_ratio_severe": 0.01,
+    "noise_presence_requires_evidence": true,
+    "emotion_from_loudness": false,
+    "overlap_from_dual_mono_channels": false
+  },
+  "status": "baseline_only_until_representative_labels"
+}

@@ -1,0 +1,112 @@
+{
+  "candidate_id": "P4",
+  "development_files": [
+    "call_001.ogg",
+    "call_002.ogg"
+  ],
+  "holdout_files": [
+    "call_003.ogg"
+  ],
+  "holdout_result": {
+    "files": [
+      {
+        "cost_usd": 0.0015883,
+        "field_accuracy": 0.375,
+        "file": "call_003.ogg",
+        "prediction": {
+          "audio_quality": "clear",
+          "background_noise_present": true,
+          "background_noise_severity": "low",
+          "background_noise_type": "humming noise",
+          "confidence": 0.95,
+          "emotional_intensity": "low",
+          "emotional_tone": "neutral",
+          "long_silence_present": false,
+          "speaker_overlap_present": false
+        }
+      }
+    ],
+    "mean_field_accuracy": 0.375,
+    "total_cost_usd": 0.0015883
+  },
+  "prompt_results": {
+    "baseline": {
+      "files": [
+        {
+          "cost_usd": 0.0005202,
+          "field_accuracy": 0.75,
+          "file": "call_001.ogg",
+          "prediction": {
+            "audio_quality": "clear",
+            "background_noise_present": false,
+            "background_noise_severity": "none",
+            "background_noise_type": "",
+            "confidence": 0.95,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": false
+          }
+        },
+        {
+          "cost_usd": 0.0005505,
+          "field_accuracy": 0.375,
+          "file": "call_002.ogg",
+          "prediction": {
+            "audio_quality": "clear",
+            "background_noise_present": false,
+            "background_noise_severity": "none",
+            "background_noise_type": "",
+            "confidence": 0.88,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": false
+          }
+        }
+      ],
+      "mean_field_accuracy": 0.5625,
+      "total_cost_usd": 0.0010707
+    },
+    "rubric_v1": {
+      "files": [
+        {
+          "cost_usd": 0.0005409,
+          "field_accuracy": 0.625,
+          "file": "call_001.ogg",
+          "prediction": {
+            "audio_quality": "clear",
+            "background_noise_present": false,
+            "background_noise_severity": "none",
+            "background_noise_type": "",
+            "confidence": 0.95,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": true,
+            "speaker_overlap_present": false
+          }
+        },
+        {
+          "cost_usd": 0.0005706,
+          "field_accuracy": 0.375,
+          "file": "call_002.ogg",
+          "prediction": {
+            "audio_quality": "clear",
+            "background_noise_present": false,
+            "background_noise_severity": "none",
+            "background_noise_type": "",
+            "confidence": 0.95,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": false
+          }
+        }
+      ],
+      "mean_field_accuracy": 0.5,
+      "total_cost_usd": 0.0011115
+    }
+  },
+  "selected_prompt": "baseline",
+  "warning": "Two development files are insufficient to freeze a production prompt."
+}

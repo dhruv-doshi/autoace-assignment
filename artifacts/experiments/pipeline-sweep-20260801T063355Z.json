@@ -1,0 +1,310 @@
+{
+  "candidates": [
+    {
+      "average_field_accuracy": 0.625,
+      "candidate_id": "P4",
+      "completed_count": 3,
+      "cost_per_audio_minute_usd": 0.000416799311257764,
+      "exact_match_rate": 0.0,
+      "field_accuracy": {
+        "audio_quality": 1.0,
+        "background_noise_present": 1.0,
+        "background_noise_severity": 0.3333333333333333,
+        "background_noise_type": 0.6666666666666666,
+        "emotional_intensity": 0.0,
+        "emotional_tone": 0.3333333333333333,
+        "long_silence_present": 0.6666666666666666,
+        "speaker_overlap_present": 1.0
+      },
+      "file_count": 3,
+      "files": [
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": false,
+            "background_noise_severity": "none",
+            "background_noise_type": "",
+            "confidence": 0.9,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": true,
+            "speaker_overlap_present": false
+          },
+          "cost_usd": 0.000542,
+          "file": "call_001.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 495035,
+            "dsp": {
+              "bandwidth_hz": 1053.714660556191,
+              "clipping_ratio": 2.0200591877342008e-06,
+              "crest_factor": 8.535137155007531,
+              "dbfs": -18.624475164014772,
+              "dc_offset": 3.1272450087271864e-06,
+              "duration_seconds": 30.9396875,
+              "peak_abs": 0.999969482421875,
+              "rms": 0.1171591579914093,
+              "spectral_centroid_hz": 1188.293748760761,
+              "spectral_flatness": 0.18365409800169483,
+              "zcr": 0.12473082656948815
+            },
+            "elapsed_seconds": 6.018016082998656,
+            "events_backend": "dsp_proxy",
+            "input_bytes": 503444,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 30.946188,
+            "input_sample_rate_hz": 48000,
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 75.828125,
+            "pipeline": "P4",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.000542,
+              "estimated_cost_usd": 0.0015514,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": false,
+                "background_noise_severity": "none",
+                "background_noise_type": "",
+                "confidence": 0.9,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": true,
+                "speaker_overlap_present": false
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.000542,
+              "usage": {
+                "completion_tokens": 98,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.000542,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.000245,
+                  "upstream_inference_cost": 0.000542,
+                  "upstream_inference_prompt_cost": 0.000297
+                },
+                "is_byok": false,
+                "prompt_tokens": 990,
+                "prompt_tokens_details": {
+                  "audio_tokens": 774,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1088
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 2.8999999999999986,
+              "speech_ratio": 0.3703980526629433
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        },
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": true,
+            "background_noise_severity": "low",
+            "background_noise_type": "hum",
+            "confidence": 0.95,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": true
+          },
+          "cost_usd": 0.0005798,
+          "file": "call_002.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 559370,
+            "dsp": {
+              "bandwidth_hz": 1104.8399328467735,
+              "clipping_ratio": 0.0,
+              "crest_factor": 13.80761162447983,
+              "dbfs": -27.09946027868245,
+              "dc_offset": -9.657688906372641e-07,
+              "duration_seconds": 34.960625,
+              "peak_abs": 0.6097412109375,
+              "rms": 0.04415978863835335,
+              "spectral_centroid_hz": 1115.0220519243298,
+              "spectral_flatness": 0.17974054785309124,
+              "zcr": 0.13166621675495066
+            },
+            "elapsed_seconds": 4.257409332996758,
+            "events_backend": "dsp_proxy",
+            "input_bytes": 568799,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 34.967125,
+            "input_sample_rate_hz": 48000,
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 104.046875,
+            "pipeline": "P4",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005798,
+              "estimated_cost_usd": 0.0015901,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": true,
+                "background_noise_severity": "low",
+                "background_noise_type": "hum",
+                "confidence": 0.95,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": true
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0011218,
+              "usage": {
+                "completion_tokens": 101,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005798,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.0002525,
+                  "upstream_inference_cost": 0.0005798,
+                  "upstream_inference_prompt_cost": 0.0003273
+                },
+                "is_byok": false,
+                "prompt_tokens": 1091,
+                "prompt_tokens_details": {
+                  "audio_tokens": 875,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 0,
+                  "video_tokens": 0
+                },
+                "total_tokens": 1192
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 3.29,
+              "speech_ratio": 0.366126177664158
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        },
+        {
+          "analysis": {
+            "audio_quality": "clear",
+            "background_noise_present": true,
+            "background_noise_severity": "low",
+            "background_noise_type": "sharp static",
+            "confidence": 0.9,
+            "emotional_intensity": "low",
+            "emotional_tone": "neutral",
+            "long_silence_present": false,
+            "speaker_overlap_present": true
+          },
+          "cost_usd": 0.0005304,
+          "file": "call_003.ogg",
+          "stats": {
+            "decoded_sample_rate_hz": 16000,
+            "decoded_samples": 2750740,
+            "dsp": {
+              "bandwidth_hz": 1443.1402658395498,
+              "clipping_ratio": 1.0906156161614693e-05,
+              "crest_factor": 8.764653256820573,
+              "dbfs": -18.854694788223924,
+              "dc_offset": -2.3212969608721323e-06,
+              "duration_seconds": 171.92125,
+              "peak_abs": 1.0,
+              "rms": 0.11409464478492737,
+              "spectral_centroid_hz": 1512.5767039290831,
+              "spectral_flatness": 0.3373891185587147,
+              "zcr": 0.12895443733483983
+            },
+            "elapsed_seconds": 6.5671535410001525,
+            "events_backend": "dsp_proxy",
+            "input_bytes": 2791833,
+            "input_channel_layout": "stereo",
+            "input_channels": 2,
+            "input_codec": "opus",
+            "input_duration_seconds": 171.927771,
+            "input_sample_rate_hz": 48000,
+            "overlap_backend": "deterministic_false_default",
+            "peak_rss_mb": 583.765625,
+            "pipeline": "P4",
+            "quality_backend": "dsp_proxy",
+            "remote": {
+              "actual_cost_usd": 0.0005304,
+              "estimated_cost_usd": 0.002905,
+              "model": "google/gemini-3.5-flash-lite",
+              "observation": {
+                "audio_quality": "clear",
+                "background_noise_present": true,
+                "background_noise_severity": "low",
+                "background_noise_type": "sharp static",
+                "confidence": 0.9,
+                "emotional_intensity": "low",
+                "emotional_tone": "neutral",
+                "long_silence_present": false,
+                "speaker_overlap_present": true
+              },
+              "prompt_version": "p4-openrouter-v2",
+              "spent_usd": 0.0016522,
+              "usage": {
+                "completion_tokens": 81,
+                "completion_tokens_details": {
+                  "audio_tokens": 0,
+                  "image_tokens": 0,
+                  "reasoning_tokens": 0
+                },
+                "cost": 0.0005304,
+                "cost_details": {
+                  "upstream_inference_completions_cost": 0.0002025,
+                  "upstream_inference_cost": 0.0005304,
+                  "upstream_inference_prompt_cost": 0.0003279
+                },
+                "is_byok": false,
+                "prompt_tokens": 4513,
+                "prompt_tokens_details": {
+                  "audio_tokens": 4299,
+                  "cache_write_tokens": 0,
+                  "cached_tokens": 3800,
+                  "video_tokens": 0
+                },
+                "total_tokens": 4594
+              }
+            },
+            "silero_model_used": false,
+            "vad": {
+              "backend": "energy",
+              "longest_silence_seconds": 7.329999999999998,
+              "speech_ratio": 0.6209238241345967
+            },
+            "vad_backend": "energy"
+          },
+          "status": "complete"
+        }
+      ],
+      "mean_elapsed_seconds": 5.614192985665189,
+      "peak_rss_mb": 583.765625,
+      "status": "complete",
+      "total_audio_minutes": 3.9640180666666667,
+      "total_cost_usd": 0.0016522
+    }
+  ],
+  "dataset": "assignment",
+  "run_at_utc": "2026-08-01T06:33:38.345600+00:00"
+}

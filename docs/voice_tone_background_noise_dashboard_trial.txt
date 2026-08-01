@@ -1,0 +1,192 @@
+AUTOACE AI
+Voice Tone and Background Noise
+Technical Trial Project
+
+Build the most accurate, practical, and cost-efficient system for classifying emotional tone and detecting background noise in production call audio.
+
+Target deadline: Friday, 7:00 p.m. ET
+Cost ceiling: $0.003 per audio minute
+Input: Three labeled production calls
+Evaluation: Hidden test set
+
+1. Objective
+
+Your goal is to build a system that analyzes emotional tone and background noise in audio from real production calls. The solution should achieve the highest possible accuracy on a hidden test set while remaining inexpensive, reproducible, and fast enough for production use.
+
+2. Required Output Schema
+
+For each audio clip, return the fields below. Use the specified data types and enum values exactly where provided.
+
+emotional_tone (Enum)
+Allowed values: neutral | satisfied | frustrated | upset | distressed
+Definition: The primary emotional tone expressed by the customer. Neutral means no clear positive or negative emotion. Satisfied means pleased, relieved, appreciative, or clearly positive. Frustrated means annoyed, impatient, or dissatisfied without strong anger or distress. Upset means clearly angry, agitated, or strongly dissatisfied. Distressed means highly emotional, overwhelmed, panicked, crying, or otherwise emotionally escalated.
+
+emotional_intensity (Enum)
+Allowed values: low | medium | high
+Definition: The strength of the detected emotional tone. Low is subtle or mild. Medium is clear and sustained. High is strong, escalated, or likely to require attention.
+
+background_noise_present (Boolean)
+Allowed values: true | false
+Definition: Whether meaningful non-speech sound is audible in the background. Barely perceptible artifacts should not automatically count as background noise.
+
+background_noise_type (String)
+Allowed values: Open text; empty string when no noise is present
+Definition: A concise description of the dominant background noise, such as office chatter, music, road noise, television, keyboard typing, wind, or mechanical noise.
+
+background_noise_severity (Enum)
+Allowed values: none | low | medium | high
+Definition: How much the noise affects the call. None means no meaningful noise. Low is audible but does not interfere. Medium occasionally interferes with understanding. High materially impairs the conversation or analysis.
+
+audio_quality (Enum)
+Allowed values: clear | slightly_impaired | severely_impaired
+Definition: The overall technical quality of the audio, independent of emotional tone. Consider distortion, clipping, echo, static, low volume, muffled speech, robotic audio, and packet loss.
+
+speaker_overlap_present (Boolean)
+Allowed values: true | false
+Definition: Whether two or more speakers talk at the same time enough to affect understanding or analysis.
+
+long_silence_present (Boolean)
+Allowed values: true | false
+Definition: Whether the clip contains an unusually long period of silence or dead air that may indicate a call-flow or audio problem.
+
+confidence (Number)
+Allowed values: 0.0 to 1.0
+Definition: The model's confidence in the overall result. Values near 1.0 indicate high confidence; values near 0.0 indicate substantial uncertainty.
+
+Evaluation note: Emotional tone, background-noise detection, and technical audio quality will be scored separately. Do not infer frustration or distress solely from loudness, and do not infer background noise solely from poor audio quality.
+
+Example output
+
+{
+  "emotional_tone": "frustrated",
+  "emotional_intensity": "medium",
+  "background_noise_present": true,
+  "background_noise_type": "office chatter",
+  "background_noise_severity": "low",
+  "audio_quality": "clear",
+  "speaker_overlap_present": false,
+  "long_silence_present": false,
+  "confidence": 0.82
+}
+
+3. What You Will Receive
+
+- Three labeled calls from actual production use.
+- The corresponding emotional-tone and background-noise labels for those calls.
+- Audio files in the same general format as the calls that will be used for evaluation.
+- The exact label definitions and required output format.
+
+4. What You May Use
+
+You may use any technical approach that you believe will maximize accuracy, including:
+
+- Multimodal or audio-capable language models.
+- Speech emotion recognition or acoustic-event-detection models.
+- Classical machine-learning or signal-processing methods.
+- Acoustic features such as pitch, energy, speaking rate, pauses, spectral features, overlap, signal-to-noise ratio, or noise signatures.
+- Fine-tuning, transfer learning, prompt-based classification, model ensembling, or calibration.
+- A hybrid system combining deterministic acoustic features with one or more learned models.
+
+You are not required to use an LLM. A deterministic, algorithmic, or hybrid method is acceptable and may be preferable if it improves cost, latency, or reliability.
+
+5. Required Constraints
+
+Inference cost: The final production approach must cost no more than $0.003 per minute of audio analyzed.
+
+Latency: Processing time must be reasonable for production batch analysis. Report measured or estimated runtime.
+
+Reproducibility: Provide enough documentation and code for us to run the system on new audio clips.
+
+Generalization: Do not assume access to the hidden test set. The final evaluation will be performed on unseen audio.
+
+Data handling: Treat all production-call audio as confidential and do not upload it to unapproved public services.
+
+6. Expected Deliverables
+
+1. A hosted web dashboard that AutoAce can access using provided login credentials.
+2. A runnable implementation or repository with clear setup, deployment, and execution instructions.
+3. A batch-upload workflow that accepts the required test folder, processes all supported audio files, displays progress and errors, and provides downloadable structured results.
+4. Predictions for the provided calls using the required structured output schema.
+5. A short technical memo describing the approaches tested, the final architecture, and why it was selected.
+6. Validation results, including the metric used, per-class performance where possible, and a confusion matrix.
+7. A cost analysis showing estimated cost per audio minute and the assumptions behind it.
+8. A latency analysis showing processing time per audio minute or per clip.
+9. A discussion of likely failure modes, limitations, and next steps for improving accuracy.
+
+7. Hosted Dashboard and Batch Evaluation Workflow
+
+The final submission must be deployed and accessible through a web browser. AutoAce should be able to log in, upload a complete evaluation batch, run the analysis, review the results, and download the output without using the command line.
+
+- Hosting and access: Deploy the dashboard to a web-accessible environment and provide the URL and working login credentials. The deployment must remain available through the evaluation period.
+- Batch upload: Allow the evaluator to upload a folder or ZIP archive containing multiple audio clips and one CSV manifest.
+- Input folder shape: The batch contains the audio files at the folder root together with a CSV manifest. Each audio filename must correspond to one row in the CSV.
+- CSV columns: The CSV must contain a name column and a result_json column. name is the exact audio filename, including its extension. result_json contains the expected JSON object associated with that audio file when labels are included. For an unlabeled hidden test set, result_json may be empty or omitted from scoring input.
+- Processing workflow: After upload, the dashboard should validate the batch, clearly report missing or unmatched files, process each valid audio clip, and show batch progress or completion status.
+- Results: Display the prediction for each audio file using the required output schema. Results must be downloadable as a CSV or JSON file that preserves the original filename.
+- Failure handling: A single malformed or unsupported file should not cause the entire batch to fail. The dashboard should identify which file failed and why.
+
+Example batch structure
+
+evaluation_batch/
+  call_001.wav
+  call_002.mp3
+  call_003.wav
+  labels.csv
+
+Example CSV
+
+name,result_json
+call_001.wav,"{""emotional_tone"":""frustrated"",...}"
+call_002.mp3,"{""emotional_tone"":""neutral"",...}"
+
+8. Evaluation Criteria
+
+Category: Hidden-set performance
+Weight: 45%
+What We Are Evaluating: Accuracy and macro F1 for emotional tone, plus performance on background-noise, audio-quality, overlap, silence, and related output fields.
+
+Category: Cost efficiency
+Weight: 15%
+What We Are Evaluating: Compliance with the $0.003-per-minute ceiling and quality of the cost model.
+
+Category: Technical rigor
+Weight: 15%
+What We Are Evaluating: Sound validation, leakage prevention, model selection, calibration, and reproducibility.
+
+Category: Production practicality
+Weight: 10%
+What We Are Evaluating: Latency, reliability, privacy, batch handling, and operational simplicity.
+
+Category: Communication
+Weight: 5%
+What We Are Evaluating: Clarity of documentation, tradeoffs, limitations, and explanation of the approach.
+
+Category: Hosted dashboard and upload experience
+Weight: 10%
+What We Are Evaluating: A working hosted login, folder or ZIP upload, manifest validation, batch processing, clear error handling, result review, and downloadable outputs.
+
+9. Recommended Experimental Process
+
+- Define a simple baseline before attempting a complex system.
+- Use stratified cross-validation, leave-one-call-out validation, or grouped validation when multiple clips come from the same call or speaker.
+- Avoid leakage from duplicated audio, the same caller, the same call, or preprocessing artifacts appearing in both training and validation.
+- Compare at least two materially different approaches, such as an audio foundation model versus acoustic features plus a lightweight classifier.
+- Calibrate confidence scores and document how ambiguous emotional tone or low-level background noise is handled.
+
+10. Submission and Review
+
+Target submission: Friday at 7:00 p.m. Eastern Time.
+
+Earlier completion is appreciated and may be considered positively. After submission, be prepared to walk through your methodology, experiments, tradeoffs, and what you would improve with more data or time.
+
+11. Important Clarifications
+
+- The hidden test set will be used only for final evaluation and will not be shared in advance.
+- Accuracy should not be reported from the training set alone.
+- Any external paid API must be disclosed, including model name, pricing assumptions, retention policy, and whether customer audio leaves AutoAce-controlled infrastructure.
+
+12. Definition of Success
+
+A successful submission is a hosted, testable system - not merely a local demo. It must allow AutoAce to log in, upload an evaluation batch, process unseen production audio, review and download structured results, remain under the cost ceiling, and provide a reasonable path to production integration.
+
+AutoAce AI - Confidential Technical Trial

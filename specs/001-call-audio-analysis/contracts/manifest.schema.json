@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autoace.example/schemas/batch-manifest-v1.json",
+  "title": "Logical CSV Batch Manifest",
+  "description": "JSON representation used to validate parsed CSV rows.",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["name"],
+    "properties": {
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^[^/\\\\]+$"
+      },
+      "result_json": {
+        "type": ["string", "null"]
+      }
+    }
+  }
+}
